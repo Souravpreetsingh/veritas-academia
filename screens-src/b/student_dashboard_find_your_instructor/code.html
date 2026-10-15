@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.glow-text-primary{text-shadow:0 0 10px rgba(255,45,120,0.5);}.glow-border-subtle{border:1px solid rgba(255,45,120,0.22);box-shadow:inset 0 0 12px rgba(255,45,120,0.05);}.glow-btn-hover:hover{box-shadow:0 0 18px rgba(255,45,120,0.45);}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"surface-variant":"#1e1e30","inverse-on-surface":"#0a0a12","surface":"#0f0f1a","primary-fixed-dim":"#ff80aa","tertiary-container":"#665200","on-secondary-fixed-variant":"#004d4d","tertiary-fixed":"#fff0c0","on-tertiary":"#1a1000","background":"#0a0a12","outline":"#5a5068","surface-dim":"#0f0f1a","on-primary":"#1a0010","inverse-surface":"#e8e0f0","on-surface":"#e8e0f0","on-secondary-container":"#c0fff4","on-background":"#e8e0f0","tertiary":"#ffe04a","on-tertiary-fixed":"#1a1000","secondary":"#00ffcc","inverse-primary":"#8c0038","on-primary-fixed-variant":"#8c0038","primary-container":"#b3004e","on-surface-variant":"#a098b0","primary":"#ff2d78","secondary-fixed-dim":"#00e6b8","on-primary-fixed":"#3d0020","surface-container-high":"#1e1e30","error":"#ff4444","on-secondary-fixed":"#001a1a","on-error-container":"#ffa0a0","on-tertiary-container":"#fff0c0","surface-container":"#141422","surface-bright":"#1a1a2e","on-primary-container":"#ffe0ec","error-container":"#3d0f0f","outline-variant":"#302840","surface-tint":"#ff2d78","tertiary-fixed-dim":"#ffe04a","surface-container-low":"#111118","surface-container-highest":"#28283e","primary-fixed":"#ffe0ec","secondary-fixed":"#c0fff4","secondary-container":"#004d3d","on-secondary":"#001a1a","on-tertiary-fixed-variant":"#665200","on-error":"#1a0000","surface-container-lowest":"#0a0a12"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{},"fontFamily":{"headline":["Sora"],"display":["Sora"],"body":["Inter"],"label":["Space Grotesk"]},"fontSize":{}}}}</script></head><body class="bg-background font-body text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-low z-50 flex flex-col justify-between border-r border-outline-variant/40 shadow-[4px_0_24px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 min-h-0"><div class="px-5 pt-5 pb-4 border-b border-outline-variant/30"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded bg-surface-variant flex items-center justify-center glow-border-subtle"><span class="material-symbols-outlined text-primary text-xl glow-text-primary">auto_stories</span></div><div><div class="font-headline font-bold text-sm tracking-wider text-on-surface flex items-center gap-1.5"><span>VERITAS</span><span class="text-primary glow-text-primary">ACADEMIA</span></div><div class="flex items-center gap-1.5 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label text-[10px] tracking-widest uppercase text-on-surface-variant">Originality Grid 2.4</span></div></div></div></div><div class="overflow-y-auto flex-1 px-3 py-4 space-y-6"><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Core</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="dashboard" href="#"><span class="material-symbols-outlined text-base">dashboard</span><span>Dashboard</span></a><a aria-current="page" class="flex items-center gap-3 px-3 py-2 rounded-r transition-all duration-150 bg-surface-variant text-primary border-l-2 border-primary font-medium" data-path="find-faculty" href="#"><span class="material-symbols-outlined text-base">school</span><span>Find Faculty &amp; Instructors</span></a><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="manuscript-audits" href="#"><span class="material-symbols-outlined text-base">find_in_page</span><span>Manuscript Audits</span></a></nav></div><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Academic Vault</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="my-submissions" href="#"><span class="material-symbols-outlined text-base">inventory_2</span><span>My Submissions</span></a><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="originality-reports" href="#"><span class="material-symbols-outlined text-base">verified</span><span>Originality Reports</span></a><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="citations-integrity" href="#"><span class="material-symbols-outlined text-base">fact_check</span><span>Citations &amp; Integrity</span></a></nav></div><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Workspace</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="consultations" href="#"><span class="material-symbols-outlined text-base">forum</span><span>Consultations</span></a><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="faculty-feedback" href="#"><span class="material-symbols-outlined text-base">rate_review</span><span>Faculty Feedback</span></a><a class="flex items-center gap-3 px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="settings" href="#"><span class="material-symbols-outlined text-base">tune</span><span>Settings</span></a></nav></div></div></div><div class="p-3 border-t border-outline-variant/30 bg-surface-container-lowest/80"><div class="p-2.5 rounded bg-surface-container-high/60 border border-outline-variant/40 flex items-center justify-between"><div class="flex items-center gap-2.5 min-w-0"><div class="w-8 h-8 rounded-full bg-primary-container border border-primary/40 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary-container text-[18px]">person</span></div><div class="min-w-0 flex-1"><div class="font-headline font-semibold text-xs text-on-surface truncate">Elena Vance</div><div class="text-[10px] text-on-surface-variant truncate">PhD Cand. / Epistemology</div><div class="mt-1 inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-variant border border-secondary/30 text-[9px] font-label text-secondary truncate"><span class="w-1 h-1 rounded-full bg-secondary"></span><span>Stanford / Oxford Exch.</span></div></div></div><button aria-label="Account switch" class="text-on-surface-variant hover:text-secondary p-1 rounded hover:bg-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-base">unfold_more</span></button></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/30 z-40 px-6 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.35)]"><div class="flex items-center gap-4 min-w-0"><div class="hidden xl:flex items-center gap-2 text-xs font-label text-on-surface-variant"><span class="text-on-surface-variant/80">Academic Portal</span><span class="text-outline">/</span><span class="text-on-surface font-medium truncate">Faculty Marketplace &amp; Review Network</span></div><div class="relative w-80 2xl:w-96"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">search</span><input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-secondary focus:ring-1 focus:ring-secondary/40 text-on-surface placeholder:text-on-surface-variant/60 text-xs rounded pl-9 pr-8 py-2 outline-none transition-all duration-150 font-body" placeholder="⌘K Search verified faculty, methodologies, or papers..." type="text"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-label text-on-surface-variant/60 border border-outline-variant/70 rounded px-1.5 py-0.5 bg-surface-container">⌘K</span></div></div><div class="flex items-center gap-3.5 shrink-0"><div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded bg-tertiary-container/30 border border-tertiary/30 text-tertiary font-label text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span><span>Fall 2025 Review Cycle</span><span class="text-outline">•</span><span class="text-tertiary font-medium">Priority Queue Active</span></div><button aria-label="Notifications" class="relative p-2 rounded bg-surface-container-high/60 border border-outline-variant/40 text-on-surface-variant hover:text-secondary hover:border-secondary/40 transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#ff2d78]"></span></button><button class="flex items-center gap-2 px-3.5 py-2 rounded bg-surface-container-high border border-primary text-primary hover:text-on-primary-container hover:bg-primary-container text-xs font-headline font-semibold glow-btn-hover transition-all duration-200" type="button"><span class="material-symbols-outlined text-sm">upload_file</span><span>Upload Manuscript</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-background min-h-screen px-8 py-6 w-full"><div class="flex flex-col w-full pb-16 space-y-12">
+<!-- Editorial Top Section & Action Console -->
+<section class="relative w-full overflow-hidden rounded-xl bg-surface-container-low p-8 lg:p-10 shadow-2xl">
+<!-- Subtle Ambient Glow Orbs -->
+<div class="absolute -top-32 -right-32 w-96 h-96 rounded-full bg-primary/10 blur-[110px] pointer-events-none"></div>
+<div class="absolute -bottom-32 -left-32 w-96 h-96 rounded-full bg-secondary/10 blur-[110px] pointer-events-none"></div>
+<div class="relative z-10 flex flex-col gap-8">
+<!-- Meta Badging & Breadcrumb Sub-indicator -->
+<div class="flex flex-wrap items-center justify-between gap-4">
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-variant text-[11px] font-label tracking-wider text-secondary uppercase">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            Peer Protocol v4.1
+          </span>
+<span class="text-on-surface-variant/40 text-xs font-label">/</span>
+<span class="text-xs font-label text-on-surface-variant uppercase tracking-widest">Faculty Directives</span>
+</div>
+<!-- System Stats Ticker Strip -->
+<div class="flex flex-wrap items-center gap-6 px-4 py-2 rounded-lg bg-surface-container text-xs font-label text-on-surface-variant shadow-inner">
+<div class="flex items-center gap-2">
+<span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+<span class="text-on-surface font-semibold tracking-tight">18 Verified Senior Faculty</span> Active Today
+          </div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-secondary">bolt</span>
+<span>Avg Turnaround: <span class="text-on-surface font-semibold">3.8 hrs</span></span>
+</div>
+<span class="text-outline-variant">•</span>
+<div class="flex items-center gap-1.5">
+<span class="material-symbols-outlined text-sm text-tertiary">verified_user</span>
+<span class="text-tertiary font-semibold">100% Cryptographic Originality Audits</span>
+</div>
+</div>
+</div>
+<!-- Hero Header & Editorial Copy -->
+<div class="max-w-4xl space-y-4">
+<h1 class="font-headline text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight text-on-surface uppercase leading-none">
+          Find your <span class="text-primary tracking-normal">instructor.</span>
+</h1>
+<p class="font-body text-base lg:text-lg text-on-surface-variant/90 max-w-2xl leading-relaxed">
+          Access high-caliber institutional peer-reviewers, ethics directors, and senior researchers. Every manuscript assessment carries immutable cryptographic authenticity logs and verified academic integrity proofs.
+        </p>
+</div>
+<!-- Action & Filter Console -->
+<div class="pt-4 flex flex-col lg:flex-row items-stretch lg:items-center justify-between gap-4">
+<!-- Disciplines Filter Pills -->
+<div class="flex items-center gap-1.5 overflow-x-auto pb-2 lg:pb-0 scrollbar-none" id="disciplineFilter">
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-primary text-on-primary font-semibold shadow-md transition-all">
+            All Disciplines
+          </button>
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all">
+            Philosophy
+          </button>
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all">
+            Econometrics
+          </button>
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all">
+            Computational Linguistics
+          </button>
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all">
+            Bioethics
+          </button>
+<button class="px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all">
+            Law
+          </button>
+</div>
+<!-- Controls: Available Toggle & View Mode -->
+<div class="flex items-center gap-3 shrink-0">
+<label class="flex items-center gap-2.5 px-3 py-1.5 rounded bg-surface-container-high cursor-pointer select-none">
+<input checked="" class="w-3.5 h-3.5 rounded bg-surface-container-lowest text-secondary focus:ring-0 cursor-pointer accent-[#00ffcc]" type="checkbox"/>
+<span class="text-xs font-label text-on-surface">Available &lt; 24h</span>
+</label>
+<div class="flex items-center rounded bg-surface-container-high p-0.5">
+<button class="p-1.5 rounded bg-surface-variant text-secondary shadow-sm" title="Grid View">
+<span class="material-symbols-outlined text-base">grid_view</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-on-surface transition-colors" title="Compact List">
+<span class="material-symbols-outlined text-base">view_headline</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Curated Anchor: Featured Scholar Spotlight -->
+<section class="relative w-full rounded-xl bg-surface-container p-6 lg:p-8 overflow-hidden shadow-xl">
+<div class="flex flex-col xl:flex-row gap-8 items-stretch justify-between">
+<!-- Scholar Left Block -->
+<div class="flex flex-col sm:flex-row items-start sm:items-center gap-6 min-w-0 flex-1">
+<div class="relative w-28 h-28 rounded-lg overflow-hidden shrink-0 shadow-lg bg-surface-container-highest">
+<img class="w-full h-full object-cover" data-alt="Editorial close-up portrait of distinguished academic advisor Dr. Marcus Vance in dark architectural setting, dramatic cinematic neon sidelighting in cyan and magenta, intellectual atmosphere, sharp focus, high-end scholarly aesthetic" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCQUoAGVRQNpm-Z_Fm3reTQc_iSNr6Pq9-lYiuymzN_uUxdkLQ05_aexg_kUc1NYNc2sjXxay8kll_Rcnqyjw26GKXrzpijnONXK6AZxEkicq3spwU05BX6Ikm_fC-Bzr8M5dsJIpdF945KfSslVSX90RN6RuXY3a9VYvJ0KdyDoysHNYjOrVsn8ekscWJ50ufahr8KB9dFO4yX5A69BwxpRFoK4pyDH1t430NVSCJiJ63K8GNx3mb0Cw"/>
+<div class="absolute bottom-1 right-1 px-1.5 py-0.5 rounded bg-surface-dim/90 backdrop-blur-md text-[9px] font-label text-secondary uppercase font-semibold">
+            Anchor
+          </div>
+</div>
+<div class="space-y-2 min-w-0 flex-1">
+<div class="flex items-center gap-2">
+<span class="px-2 py-0.5 rounded text-[10px] font-label uppercase tracking-widest bg-secondary-container/40 text-secondary font-bold">
+              Faculty Spotlight
+            </span>
+<span class="text-xs font-label text-on-surface-variant/60">Ethics &amp; Biotechnology</span>
+</div>
+<h2 class="font-headline text-2xl lg:text-3xl font-bold text-on-surface tracking-tight truncate">
+            Dr. Marcus Vance
+          </h2>
+<p class="font-body text-xs text-on-surface-variant">
+            Chair of Applied Bioethics &amp; Algorithmic Governance • Senior Advisory Fellow
+          </p>
+</div>
+</div>
+<!-- Spotlight 4 Metrics & Action -->
+<div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 shrink-0 xl:border-l xl:border-outline-variant/30 xl:pl-8">
+<!-- The Strict 4 Metrics 2x2 Grid -->
+<div class="grid grid-cols-2 gap-3 min-w-[280px]">
+<div class="p-2.5 rounded bg-surface-container-high/60">
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<div class="font-headline font-bold text-sm text-secondary mt-0.5">&lt; 2 hrs</div>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high/60">
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<div class="font-headline font-bold text-sm text-tertiary mt-0.5">4.99 / 5.0</div>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high/60">
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<div class="font-headline font-bold text-sm text-on-surface mt-0.5">$65 / review</div>
+</div>
+<div class="p-2.5 rounded bg-surface-container-high/60">
+<span class="font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<div class="font-headline font-bold text-sm text-on-surface mt-0.5">640 students</div>
+</div>
+</div>
+<button class="h-11 px-5 rounded bg-primary text-on-primary font-headline font-semibold text-xs tracking-wider uppercase hover:opacity-95 transition-all shadow-lg flex items-center justify-center gap-2 shrink-0">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">arrow_forward</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Instructor Discovery Grid (3-Column Layout at 1440px) -->
+<section class="space-y-6">
+<div class="flex items-center justify-between">
+<div>
+<h3 class="font-headline text-lg font-bold text-on-surface tracking-tight">Active Faculty Directory</h3>
+<p class="font-label text-xs text-on-surface-variant">Verified instructional roster ranked by peer assessment velocity</p>
+</div>
+<div class="text-xs font-label text-on-surface-variant">
+        Showing <span class="text-on-surface font-semibold">6 of 18</span> Available Instructors
+      </div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<!-- Card 1: Prof. Sarah Chen -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-md">
+<img class="w-full h-full object-cover" data-alt="Monochromatic studio headshot of Prof Sarah Chen, modern computer scientist with subtle neon magenta ambient backlight, crisp studio portrait on dark backdrop" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDN-YDmUTrAhVaGlAsZw6T6sNdMSRknco7WkjCpf3KCEpBLnlynOmnvIzk3J67_GGEpSn_Se4lOj2gotTnb63kYSF4uiDckJb_ihZFKqrYrSC6f2cPSFwvMHKlf4Vn4vg_L1vw_BmqRUiM92K-NmxtJgp10RkZ1zVTSI8XM_6SaP0H98czeoHbkxwspVS3qCUoo4gY9t4m4sunEQE4Po-e_ABNuJnP0VrcgzKZ30gd-DQXPjLOukll0sw"/>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Prof. Sarah Chen</h4>
+<p class="text-xs text-on-surface-variant truncate">Neural Architectures &amp; Inference</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 2 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">4.98 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$55 / submission</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">412 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<!-- Card 2: Dr. Arthur Pendelton -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 shadow-md">
+<span class="font-headline font-bold text-sm text-secondary">AP</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Dr. Arthur Pendelton</h4>
+<p class="text-xs text-on-surface-variant truncate">Quantitative Econometrics</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 4 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">4.95 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$60 / chapter</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">248 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<!-- Card 3: Dr. Amina Al-Mansoor -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-container-high overflow-hidden shrink-0 shadow-md">
+<img class="w-full h-full object-cover" data-alt="Striking modern photographic portrait of Dr Amina Al Mansoor, international legal theorist, professional lighting with deep shadows and soft cyan neon reflections" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBs4E1owElodg_35imlq-e6k8-xbrrS1225bKhFbErtwwKgZotpWBKr72hCV970ml0pDAZtMa5P9HYmfxgkbCllNWh46kgZm57gLh1W_BFgZGTLnPMzJKljEPjjg0KcKMyZmWKakBSIoNgaZgOIdLyuC3qBRXCWlWs8wv7d_vSclPvSMLZSgsy9LeAmeWU7EnidG20FsWR6tKuXJJGpbQGhOy7DvbD9TFkIS984eKSM75_bloV5XM7_UQ"/>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Dr. Amina Al-Mansoor</h4>
+<p class="text-xs text-on-surface-variant truncate">Comparative Jurisprudence &amp; Law</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 2 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">5.00 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$75 / review</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">520 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<!-- Card 4: Prof. Julian Hayes -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 shadow-md">
+<span class="font-headline font-bold text-sm text-primary">JH</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Prof. Julian Hayes</h4>
+<p class="text-xs text-on-surface-variant truncate">Modern Epistemology &amp; Logic</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 6 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">4.92 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$40 / chapter</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">315 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<!-- Card 5: Dr. Elena Rostova -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 shadow-md">
+<span class="font-headline font-bold text-sm text-secondary">ER</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Dr. Elena Rostova</h4>
+<p class="text-xs text-on-surface-variant truncate">Computational Bio-analytics</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 3 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">4.97 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$50 / submission</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">189 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+<!-- Card 6: Dr. Kenji Takahashi -->
+<div class="flex flex-col justify-between rounded-xl bg-surface-container p-6 shadow-lg transition-transform hover:-translate-y-1 duration-200">
+<div>
+<!-- Top Row: Identity -->
+<div class="flex items-center gap-4 mb-6">
+<div class="w-12 h-12 rounded-lg bg-surface-variant flex items-center justify-center shrink-0 shadow-md">
+<span class="font-headline font-bold text-sm text-tertiary">KT</span>
+</div>
+<div class="min-w-0 flex-1">
+<h4 class="font-headline font-bold text-base text-on-surface truncate">Dr. Kenji Takahashi</h4>
+<p class="text-xs text-on-surface-variant truncate">Formal Semantics &amp; NLP</p>
+</div>
+</div>
+<!-- Strict 4 Metrics in 2x2 Grid -->
+<div class="grid grid-cols-2 gap-2.5 mb-6">
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Responsiveness</span>
+<span class="font-headline font-bold text-xs text-secondary mt-0.5 block">&lt; 4 hrs</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Rating</span>
+<span class="font-headline font-bold text-xs text-tertiary mt-0.5 block">4.94 / 5.0</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Price</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">$48 / review</span>
+</div>
+<div class="p-3 rounded bg-surface-container-high/80">
+<span class="block font-label text-[10px] uppercase tracking-wider text-on-surface-variant">Students</span>
+<span class="font-headline font-bold text-xs text-on-surface mt-0.5 block">374 students</span>
+</div>
+</div>
+</div>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-highest hover:bg-surface-variant text-on-surface hover:text-primary font-headline font-semibold text-xs transition-colors flex items-center justify-center gap-2">
+<span>View Profile &amp; Request Review</span>
+<span class="material-symbols-outlined text-sm">open_in_new</span>
+</button>
+</div>
+</div>
+</section>
+<!-- Secondary Academic Activity & Verification Queue -->
+<section class="rounded-xl bg-surface-container-low p-6 space-y-4 shadow-xl">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-3">
+<span class="flex h-2.5 w-2.5 relative">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-secondary"></span>
+</span>
+<h4 class="font-headline font-bold text-sm text-on-surface uppercase tracking-wider">Live Manuscript Verification &amp; Audit Pipeline</h4>
+</div>
+<div class="flex items-center gap-2 text-xs font-label text-on-surface-variant">
+<span>Network Hash Sync:</span>
+<code class="text-secondary font-mono">0x9f...a831</code>
+</div>
+</div>
+<!-- Horizontal Strip of Active Verifications -->
+<div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+<!-- Queue Item 1 -->
+<div class="p-4 rounded-lg bg-surface-container flex flex-col justify-between space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0">
+<span class="font-label text-[10px] uppercase tracking-widest text-secondary block font-semibold">Under Audit #9421</span>
+<div class="font-headline text-xs font-semibold text-on-surface truncate">Dialectical Methods in High-D Latents</div>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant shrink-0">ETA ~1.4 hrs</span>
+</div>
+<div class="space-y-1.5">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-secondary h-full rounded-full" style="width: 72%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-label text-on-surface-variant">
+<span>Reviewer: Prof. Sarah Chen</span>
+<span class="text-on-surface">Hash Confirmed</span>
+</div>
+</div>
+</div>
+<!-- Queue Item 2 -->
+<div class="p-4 rounded-lg bg-surface-container flex flex-col justify-between space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0">
+<span class="font-label text-[10px] uppercase tracking-widest text-primary block font-semibold">Originality Check #9420</span>
+<div class="font-headline text-xs font-semibold text-on-surface truncate">Empirical Foundations of Micro-Currencies</div>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant shrink-0">ETA ~3.2 hrs</span>
+</div>
+<div class="space-y-1.5">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-primary h-full rounded-full" style="width: 38%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-label text-on-surface-variant">
+<span>Reviewer: Dr. Arthur Pendelton</span>
+<span class="text-on-surface">Vector Scan 89%</span>
+</div>
+</div>
+</div>
+<!-- Queue Item 3 -->
+<div class="p-4 rounded-lg bg-surface-container flex flex-col justify-between space-y-3">
+<div class="flex items-start justify-between gap-2">
+<div class="min-w-0">
+<span class="font-label text-[10px] uppercase tracking-widest text-tertiary block font-semibold">Completed #9418</span>
+<div class="font-headline text-xs font-semibold text-on-surface truncate">Deontic Logic in Multi-Agent Synthesis</div>
+</div>
+<span class="text-[10px] font-label text-tertiary font-semibold shrink-0">Passed 100%</span>
+</div>
+<div class="space-y-1.5">
+<div class="w-full bg-surface-container-high h-1.5 rounded-full overflow-hidden">
+<div class="bg-tertiary h-full rounded-full" style="width: 100%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] font-label text-on-surface-variant">
+<span>Cert Hash: 0x88f...1b0a</span>
+<a class="text-secondary hover:underline" href="#">Download Audit</a>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Interactive Filtering Micro-Script -->
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+      const filterButtons = document.querySelectorAll('#disciplineFilter button');
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          filterButtons.forEach(b => {
+            b.className = 'px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all';
+          });
+          btn.className = 'px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-primary text-on-primary font-semibold shadow-md transition-all';
+        });
+      });
+    });
+  </script>
+</div></main></div></body></html>

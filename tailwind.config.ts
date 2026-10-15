@@ -1,0 +1,113 @@
+import type { Config } from "tailwindcss";
+
+const config: Config = {
+  darkMode: "class",
+  content: [
+    "./src/**/*.{js,ts,jsx,tsx,mdx,html}",
+  ],
+  theme: {
+    extend: {
+      colors: {
+        "primary-fixed-dim": "#ff80aa",
+        "on-secondary": "#001a1a",
+        "inverse-primary": "#8c0038",
+        "tertiary-container": "#665200",
+        tertiary: "#ffe04a",
+        "surface-variant": "#1e1e30",
+        "surface-container-low": "#111118",
+        primary: "#ff2d78",
+        "on-tertiary-fixed": "#1a1000",
+        "on-tertiary-container": "#fff0c0",
+        "surface-container-highest": "#28283e",
+        "inverse-surface": "#e8e0f0",
+        "primary-container": "#b3004e",
+        outline: "#5a5068",
+        "on-error": "#1a0000",
+        "on-primary-fixed-variant": "#8c0038",
+        "surface-tint": "#ff2d78",
+        "on-background": "#e8e0f0",
+        "secondary-fixed": "#c0fff4",
+        "surface-bright": "#1a1a2e",
+        "tertiary-fixed-dim": "#ffe04a",
+        "surface-container-lowest": "#0a0a12",
+        "inverse-on-surface": "#0a0a12",
+        "on-error-container": "#ffa0a0",
+        "error-container": "#3d0f0f",
+        "on-primary-container": "#ffe0ec",
+        "on-secondary-fixed": "#001a1a",
+        "surface-container-high": "#1e1e30",
+        "on-primary": "#1a0010",
+        "on-primary-fixed": "#3d0020",
+        "on-secondary-container": "#c0fff4",
+        "secondary-container": "#004d3d",
+        "on-surface-variant": "#a098b0",
+        "on-tertiary-fixed-variant": "#665200",
+        "on-tertiary": "#1a1000",
+        "on-secondary-fixed-variant": "#004d4d",
+        "on-surface": "#e8e0f0",
+        "outline-variant": "#302840",
+        background: "#0a0a12",
+        "surface-container": "#141422",
+        "surface-dim": "#0f0f1a",
+        "secondary-fixed-dim": "#00e6b8",
+        error: "#ff4444",
+        secondary: "#00ffcc",
+        "tertiary-fixed": "#fff0c0",
+        "primary-fixed": "#ffe0ec",
+        // shared portal "surface" swatch + public-site "surface" scale
+        surface: {
+          DEFAULT: "#0f0f1a",
+          base: "#090a10",
+          card: "#0e101a",
+          elevated: "#151828",
+          border: "#1f2438",
+          borderHover: "#2d3450",
+        },
+        // public marketing site brand palette
+        brand: {
+          magenta: "#ff2d78",
+          cyan: "#00f0ff",
+          emerald: "#00ffaa",
+          purple: "#a855f7",
+          amber: "#f59e0b",
+        },
+      },
+      borderRadius: {
+        DEFAULT: "0.125rem",
+        lg: "0.25rem",
+        xl: "0.5rem",
+        full: "0.75rem",
+      },
+      fontFamily: {
+        headline: ["Sora"],
+        display: ["Sora"],
+        body: ["Inter"],
+        label: ["Space Grotesk"],
+        sans: ['"Plus Jakarta Sans"', "sans-serif"],
+        mono: ['"JetBrains Mono"', "monospace"],
+      },
+      animation: {
+        "float-slow": "float 6s ease-in-out infinite",
+        "pulse-subtle": "pulseSubtle 4s ease-in-out infinite",
+        "glow-cyan": "glowCyan 3s ease-in-out infinite",
+      },
+      keyframes: {
+        float: {
+          "0%, 100%": { transform: "translateY(0px)" },
+          "50%": { transform: "translateY(-8px)" },
+        },
+        pulseSubtle: {
+          "0%, 100%": { opacity: "0.4" },
+          "50%": { opacity: "0.7" },
+        },
+        glowCyan: {
+          "0%, 100%": { filter: "drop-shadow(0 0 12px rgba(0,240,255,0.3))" },
+          "50%": { filter: "drop-shadow(0 0 24px rgba(0,240,255,0.6))" },
+        },
+      },
+    },
+  },
+  plugins: [],
+};
+
+export default config;

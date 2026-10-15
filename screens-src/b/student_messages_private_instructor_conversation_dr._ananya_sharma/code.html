@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&amp;family=Sora:wght@400;600;700;800&amp;family=Space+Grotesk:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.glow-text-primary{text-shadow:0 0 10px rgba(255,45,120,0.5);}.glow-border-subtle{border:1px solid rgba(255,45,120,0.22);box-shadow:inset 0 0 12px rgba(255,45,120,0.05);}.glow-btn-hover:hover{box-shadow:0 0 18px rgba(255,45,120,0.45);}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config={darkMode:"class",theme:{extend:{"colors":{"on-background":"#e8e0f0","surface-container-lowest":"#0a0a12","outline-variant":"#302840","primary-fixed-dim":"#ff80aa","secondary-container":"#004d3d","error":"#ff4444","on-surface":"#e8e0f0","tertiary-container":"#665200","on-tertiary-fixed-variant":"#665200","secondary-fixed-dim":"#00e6b8","on-tertiary":"#1a1000","outline":"#5a5068","surface-dim":"#0f0f1a","inverse-primary":"#8c0038","error-container":"#3d0f0f","surface-variant":"#1e1e30","surface-container-highest":"#28283e","primary-fixed":"#ffe0ec","surface-tint":"#ff2d78","on-secondary":"#001a1a","on-primary-fixed":"#3d0020","surface-container-low":"#111118","tertiary":"#ffe04a","surface-container":"#141422","on-tertiary-container":"#fff0c0","tertiary-fixed-dim":"#ffe04a","on-primary":"#1a0010","on-secondary-fixed":"#001a1a","on-primary-container":"#ffe0ec","on-secondary-fixed-variant":"#004d4d","surface":"#0f0f1a","surface-bright":"#1a1a2e","background":"#0a0a12","on-error":"#1a0000","primary-container":"#b3004e","on-tertiary-fixed":"#1a1000","on-surface-variant":"#a098b0","primary":"#ff2d78","inverse-surface":"#e8e0f0","on-primary-fixed-variant":"#8c0038","on-error-container":"#ffa0a0","on-secondary-container":"#c0fff4","tertiary-fixed":"#fff0c0","secondary-fixed":"#c0fff4","inverse-on-surface":"#0a0a12","secondary":"#00ffcc","surface-container-high":"#1e1e30"},"borderRadius":{"DEFAULT":"0.125rem","lg":"0.25rem","xl":"0.5rem","full":"0.75rem"},"spacing":{},"fontFamily":{"headline":["Sora"],"display":["Sora"],"body":["Inter"],"label":["Space Grotesk"]},"fontSize":{}}}}</script></head><body class="bg-background font-body text-on-surface antialiased selection:bg-primary-container selection:text-on-primary-container min-h-screen"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-low z-50 flex flex-col justify-between border-r border-outline-variant/40 shadow-[4px_0_24px_rgba(0,0,0,0.5)]"><div class="flex flex-col flex-1 min-h-0"><div class="px-5 pt-5 pb-4 border-b border-outline-variant/30"><div class="flex items-center gap-3"><div class="w-9 h-9 rounded bg-surface-variant flex items-center justify-center glow-border-subtle"><span class="material-symbols-outlined text-primary text-xl glow-text-primary">auto_stories</span></div><div><div class="font-headline font-bold text-sm tracking-wider text-on-surface flex items-center gap-1.5"><span>VERITAS</span><span class="text-primary glow-text-primary">ACADEMIA</span></div><div class="flex items-center gap-1.5 mt-0.5"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span><span class="font-label text-[10px] tracking-widest uppercase text-on-surface-variant">Originality Grid 2.4</span></div></div></div></div><div class="overflow-y-auto flex-1 px-3 py-4 space-y-6"><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Core</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="dashboard" href="#">Dashboard</a><a aria-current="page" class="block px-3 py-2 rounded-r transition-all duration-150 bg-surface-variant text-primary border-l-2 border-primary font-medium" data-path="messages" href="#">Messages</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="find-faculty-instructors" href="#">Find Faculty &amp; Instructors</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="new-service-request" href="#">New Service Request</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="my-requests" href="#">My Requests</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="manuscript-audits" href="#">Manuscript Audits</a></nav></div><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Academic Vault</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="my-submissions" href="#">My Submissions</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="originality-reports" href="#">Originality Reports</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="citations-integrity" href="#">Citations &amp; Integrity</a></nav></div><div class="space-y-1"><div class="px-3 font-label text-[10px] uppercase tracking-widest text-on-surface-variant/70 font-semibold mb-2">Workspace</div><nav class="space-y-0.5" data-active-classes="bg-surface-variant text-primary border-l-2 border-primary font-medium"><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="consultations" href="#">Consultations</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="faculty-feedback" href="#">Faculty Feedback</a><a class="block px-3 py-2 text-xs text-on-surface-variant hover:text-on-surface hover:bg-surface-container-high rounded-r transition-all duration-150" data-path="settings" href="#">Settings</a></nav></div></div></div><div class="p-3 border-t border-outline-variant/30 bg-surface-container-lowest/80"><div class="p-2.5 rounded bg-surface-container-high/60 border border-outline-variant/40 flex items-center justify-between"><div class="flex items-center gap-2.5 min-w-0"><div class="w-8 h-8 rounded-full bg-primary-container border border-primary/40 flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary-container text-[18px]">person</span></div><div class="min-w-0 flex-1"><div class="font-headline font-semibold text-xs text-on-surface truncate">Elena Vance</div><div class="text-[10px] text-on-surface-variant truncate">PhD Cand. / Epistemology</div><div class="mt-1 inline-flex items-center gap-1 px-1.5 py-0.5 rounded bg-surface-variant border border-secondary/30 text-[9px] font-label text-secondary truncate"><span class="w-1 h-1 rounded-full bg-secondary"></span><span>Stanford / Oxford Exch.</span></div></div></div><button aria-label="Account switch" class="text-on-surface-variant hover:text-secondary p-1 rounded hover:bg-surface-variant transition-colors" type="button"><span class="material-symbols-outlined text-base">unfold_more</span></button></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/85 backdrop-blur-xl border-b border-outline-variant/30 z-40 px-6 flex items-center justify-between shadow-[0_4px_20px_rgba(0,0,0,0.35)]"><div class="flex items-center gap-4 min-w-0"><nav aria-label="Breadcrumb" class="hidden xl:flex items-center gap-2 text-xs font-label text-on-surface-variant"><span class="text-on-surface-variant/80 hover:text-secondary transition-colors cursor-pointer">Faculty Marketplace &amp; Review Network</span><span class="text-outline">/</span><span class="text-on-surface-variant/80 hover:text-secondary transition-colors cursor-pointer">Dr. Marcus Vance</span><span class="text-outline">/</span><span class="text-secondary font-medium truncate">New Service Request</span></nav><div class="relative w-72 2xl:w-88"><span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">search</span><input class="w-full bg-surface-container-low border border-outline-variant/50 focus:border-secondary focus:ring-1 focus:ring-secondary/40 text-on-surface placeholder:text-on-surface-variant/60 text-xs rounded pl-9 pr-8 py-2 outline-none transition-all duration-150 font-body" placeholder="Search verified faculty, methodologies, or papers..." type="text"/><span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-[10px] font-label text-on-surface-variant/60 border border-outline-variant/70 rounded px-1.5 py-0.5 bg-surface-container">⌘K</span></div></div><div class="flex items-center gap-3.5 shrink-0"><div class="hidden md:flex items-center gap-2 px-3 py-1.5 rounded bg-tertiary-container/30 border border-tertiary/30 text-tertiary font-label text-[11px]"><span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-ping"></span><span>Fall 2025 Review Cycle</span><span class="text-outline">•</span><span class="text-tertiary font-medium">Priority Queue Active</span></div><button aria-label="Notifications" class="relative p-2 rounded bg-surface-container-high/60 border border-outline-variant/40 text-on-surface-variant hover:text-secondary hover:border-secondary/40 transition-colors" type="button"><span class="material-symbols-outlined text-lg">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#ff2d78]"></span></button><button class="flex items-center gap-2 px-3.5 py-2 rounded bg-surface-container-high border border-primary text-primary hover:text-on-primary-container hover:bg-primary-container text-xs font-headline font-semibold glow-btn-hover transition-all duration-200" type="button"><span class="material-symbols-outlined text-sm">upload_file</span><span>Upload Manuscript</span></button><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shrink-0"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></header><main class="relative pt-16 bg-background min-h-screen px-8 py-6 w-full"><div class="flex flex-col w-full font-body text-on-surface">
+<!-- Top Context & Ledger Breadcrumb Strip -->
+<div class="flex flex-wrap items-center justify-between gap-4 pb-4 border-b border-outline-variant/30">
+<div class="flex items-center gap-2 text-xs font-label text-on-surface-variant">
+<span class="hover:text-secondary cursor-pointer transition-colors">Academic Vault</span>
+<span class="text-outline">/</span>
+<span class="hover:text-secondary cursor-pointer transition-colors">Messages &amp; Direct Consultations</span>
+<span class="text-outline">/</span>
+<span class="text-secondary font-medium flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span>
+        Dr. Ananya Sharma (REQ-FBX-104582)
+      </span>
+</div>
+<!-- Right Cryptographic Trust Badge -->
+<div class="flex items-center gap-3">
+<div class="flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container-high/60 border border-secondary/20 text-[11px] font-label text-secondary">
+<span class="material-symbols-outlined text-xs text-secondary">verified_user</span>
+<span>SHA-256 Ledger Witness #88204-E2E</span>
+<span class="inline-block w-1 h-1 rounded-full bg-secondary"></span>
+<span class="text-on-surface-variant text-[10px]">Sync Active</span>
+</div>
+<div class="flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container-high/40 text-on-surface-variant text-xs font-label">
+<span class="material-symbols-outlined text-sm text-primary">lock</span>
+<span>Zero-Knowledge Node</span>
+</div>
+</div>
+</div>
+<!-- Primary 3-Column Grid Canvas -->
+<div class="grid grid-cols-12 gap-5 mt-4 min-h-[calc(100vh-140px)]">
+<!-- ========================================================================= -->
+<!-- COLUMN 1: Conversation Navigation & Inbox Column (~320-340px / 3 cols)     -->
+<!-- ========================================================================= -->
+<aside class="col-span-12 lg:col-span-4 xl:col-span-3 flex flex-col bg-surface-container-low/70 rounded-xl border border-outline-variant/35 backdrop-blur-md overflow-hidden">
+<!-- Inbox Header -->
+<div class="p-4 border-b border-outline-variant/30 space-y-3 bg-surface-container-low">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<h2 class="font-headline font-bold text-base tracking-tight text-on-surface">Messages</h2>
+<span class="px-2 py-0.5 rounded-full text-[10px] font-label font-bold bg-primary/15 text-primary border border-primary/30">
+              5 Active
+            </span>
+<span class="px-1.5 py-0.2 rounded-full text-[10px] font-label font-semibold bg-secondary/15 text-secondary border border-secondary/30">
+              1 unread
+            </span>
+</div>
+<button class="flex items-center gap-1 px-2.5 py-1 rounded bg-primary-container/40 text-primary-fixed border border-primary/40 text-xs font-headline font-medium hover:bg-primary hover:text-on-primary transition-all glow-btn-hover" title="Create new private consultation thread">
+<span class="material-symbols-outlined text-sm">add</span>
+<span class="text-[11px]">New</span>
+</button>
+</div>
+<!-- Search Inbox -->
+<div class="relative">
+<span class="material-symbols-outlined absolute left-2.5 top-1/2 -translate-y-1/2 text-on-surface-variant text-base">search</span>
+<input class="w-full bg-surface-container-high/60 border border-outline-variant/50 focus:border-secondary focus:ring-1 focus:ring-secondary/40 text-on-surface placeholder:text-on-surface-variant/50 text-xs rounded pl-8 pr-3 py-1.5 outline-none font-body transition-colors" placeholder="Search by faculty, manuscript ID..." type="text"/>
+</div>
+<!-- Filter Pills -->
+<div class="flex items-center gap-1.5 pt-1">
+<button class="px-2.5 py-1 rounded text-[11px] font-label font-medium bg-primary/20 text-primary border border-primary/40 flex items-center gap-1">
+<span>All</span>
+<span class="text-[10px] opacity-75">5</span>
+</button>
+<button class="px-2.5 py-1 rounded text-[11px] font-label font-medium bg-surface-container-high/50 text-on-surface-variant hover:text-secondary border border-outline-variant/40 flex items-center gap-1 transition-colors">
+<span>Unread</span>
+<span class="text-[10px] px-1 rounded-full bg-secondary/20 text-secondary">1</span>
+</button>
+<button class="px-2.5 py-1 rounded text-[11px] font-label font-medium bg-surface-container-high/50 text-on-surface-variant hover:text-on-surface border border-outline-variant/40 flex items-center gap-1 transition-colors">
+<span>Active Requests</span>
+<span class="text-[10px] opacity-75">4</span>
+</button>
+</div>
+</div>
+<!-- Thread List -->
+<div class="flex-1 overflow-y-auto divide-y divide-outline-variant/20 scrollbar-thin">
+<!-- Conversation Item 1 (ACTIVE / SELECTED) -->
+<div class="relative p-3.5 bg-gradient-to-r from-primary/10 via-surface-container-high/70 to-surface-container-high border-l-4 border-primary cursor-pointer transition-all">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-gradient-to-tr from-primary to-secondary p-[1.5px]">
+<div class="w-full h-full rounded-full bg-surface-container-highest flex items-center justify-center font-headline font-bold text-xs text-on-surface">
+                  AS
+                </div>
+</div>
+<span class="absolute bottom-0 right-0 w-2.5 h-2.5 rounded-full bg-secondary border-2 border-surface-container-high shadow-[0_0_6px_#00ffcc]"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 truncate">
+<h4 class="font-headline font-semibold text-xs text-on-surface truncate">Dr. Ananya Sharma</h4>
+<span class="material-symbols-outlined text-[14px] text-secondary" title="Verified Faculty">verified</span>
+</div>
+<span class="font-label text-[10px] text-primary shrink-0">11:24 AM</span>
+</div>
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[9px] font-label uppercase tracking-wider text-secondary px-1 rounded bg-secondary/10 border border-secondary/25 truncate">
+                  REQ-FBX-104582
+                </span>
+<span class="text-[10px] text-on-surface-variant truncate">Paper Originality Review</span>
+</div>
+<p class="text-xs text-on-surface/90 line-clamp-1">
+                Thanks for the update. Could you also explain which sections...
+              </p>
+</div>
+</div>
+</div>
+<!-- Conversation Item 2 -->
+<div class="p-3.5 bg-transparent hover:bg-surface-container-high/40 cursor-pointer border-l-4 border-transparent hover:border-outline-variant transition-all">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-xs text-on-surface border border-outline-variant/60">
+                MC
+              </div>
+<span class="absolute -top-0.5 -right-0.5 w-2 h-2 rounded-full bg-primary shadow-[0_0_6px_#ff2d78]"></span>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 truncate">
+<h4 class="font-headline font-semibold text-xs text-on-surface truncate">Michael Carter</h4>
+</div>
+<span class="font-label text-[10px] text-on-surface-variant">Yesterday</span>
+</div>
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[9px] font-label uppercase tracking-wider text-on-surface-variant px-1 rounded bg-surface-variant border border-outline-variant/40 truncate">
+                  REQ-ETH-9014
+                </span>
+<span class="text-[10px] text-on-surface-variant truncate">Business Research Support</span>
+</div>
+<div class="flex items-center justify-between gap-2">
+<p class="text-xs text-on-surface-variant line-clamp-1">The secondary methodology appendix has been reviewed.</p>
+<span class="shrink-0 w-4 h-4 rounded-full bg-primary text-[9px] font-bold text-on-primary flex items-center justify-center">1</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Conversation Item 3 -->
+<div class="p-3.5 bg-transparent hover:bg-surface-container-high/40 cursor-pointer border-l-4 border-transparent hover:border-outline-variant transition-all">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-xs text-on-surface border border-outline-variant/60">
+                PM
+              </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 truncate">
+<h4 class="font-headline font-semibold text-xs text-on-surface truncate">Priya Mehta</h4>
+</div>
+<span class="font-label text-[10px] text-on-surface-variant">12 Oct</span>
+</div>
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[9px] font-label uppercase tracking-wider text-on-surface-variant px-1 rounded bg-surface-variant border border-outline-variant/40 truncate">
+                  REQ-MIT-4102
+                </span>
+<span class="text-[10px] text-on-surface-variant truncate">Data Analysis Support</span>
+</div>
+<p class="text-xs text-on-surface-variant/80 line-clamp-1">Please clarify if the R script requires Monte Carlo...</p>
+</div>
+</div>
+</div>
+<!-- Conversation Item 4 -->
+<div class="p-3.5 bg-transparent hover:bg-surface-container-high/40 cursor-pointer border-l-4 border-transparent hover:border-outline-variant transition-all">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-xs text-on-surface border border-outline-variant/60">
+                DW
+              </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 truncate">
+<h4 class="font-headline font-semibold text-xs text-on-surface truncate">Daniel Wilson</h4>
+</div>
+<span class="font-label text-[10px] text-on-surface-variant">10 Oct</span>
+</div>
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[9px] font-label uppercase tracking-wider text-on-surface-variant px-1 rounded bg-surface-variant border border-outline-variant/40 truncate">
+                  REQ-OXF-8849
+                </span>
+<span class="text-[10px] text-on-surface-variant truncate">Academic Editing Support</span>
+</div>
+<p class="text-xs text-on-surface-variant/80 line-clamp-1">LaTeX formatting verified against Springer template.</p>
+</div>
+</div>
+</div>
+<!-- Conversation Item 5 -->
+<div class="p-3.5 bg-transparent hover:bg-surface-container-high/40 cursor-pointer border-l-4 border-transparent hover:border-outline-variant transition-all">
+<div class="flex items-start gap-3">
+<div class="relative shrink-0">
+<div class="w-10 h-10 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-xs text-on-surface border border-outline-variant/60">
+                ER
+              </div>
+</div>
+<div class="flex-1 min-w-0">
+<div class="flex items-center justify-between mb-0.5">
+<div class="flex items-center gap-1.5 truncate">
+<h4 class="font-headline font-semibold text-xs text-on-surface truncate">Emily Roberts</h4>
+</div>
+<span class="font-label text-[10px] text-on-surface-variant">08 Oct</span>
+</div>
+<div class="flex items-center gap-1 mb-1">
+<span class="text-[9px] font-label uppercase tracking-wider text-tertiary px-1 rounded bg-tertiary/10 border border-tertiary/30 truncate">
+                  Completed
+                </span>
+<span class="text-[10px] text-on-surface-variant truncate">Methodology Consultation</span>
+</div>
+<p class="text-xs text-on-surface-variant/80 line-clamp-1">Let's schedule the 30-minute debrief call for Friday.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Quick Sync Status Footer -->
+<div class="p-3 bg-surface-container-lowest/80 border-t border-outline-variant/30 flex items-center justify-between text-[11px] font-label text-on-surface-variant">
+<div class="flex items-center gap-1.5">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span>Gateway: ap-south.veritas.net</span>
+</div>
+<span class="text-primary hover:underline cursor-pointer">Archive (12)</span>
+</div>
+</aside>
+<!-- ========================================================================= -->
+<!-- COLUMN 2: Main Conversation Area (Spacious Center Column, flex-1 / 6-7 col)-->
+<!-- ========================================================================= -->
+<section class="col-span-12 lg:col-span-8 xl:col-span-6 flex flex-col bg-surface-container-low/70 rounded-xl border border-outline-variant/35 backdrop-blur-md overflow-hidden relative">
+<!-- Conversation Header Pane -->
+<div class="px-5 py-3.5 bg-surface-container-high/70 border-b border-outline-variant/30 flex flex-wrap items-center justify-between gap-3 shrink-0">
+<div class="flex items-center gap-3 min-w-0">
+<div class="relative shrink-0">
+<div class="w-11 h-11 rounded-full bg-gradient-to-tr from-primary to-secondary p-[2px]">
+<div class="w-full h-full rounded-full bg-surface-container-highest flex items-center justify-center font-headline font-bold text-sm text-on-surface">
+                AS
+              </div>
+</div>
+<span class="absolute bottom-0 right-0 w-3 h-3 rounded-full bg-secondary border-2 border-surface shadow-[0_0_8px_#00ffcc]"></span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2">
+<h3 class="font-headline font-bold text-sm text-on-surface truncate">Dr. Ananya Sharma</h3>
+<span class="material-symbols-outlined text-secondary text-base" title="Verified Instructor">verified</span>
+<span class="text-[10px] font-label px-1.5 py-0.5 rounded bg-secondary-container/50 text-secondary border border-secondary/30">Active Now</span>
+</div>
+<p class="text-[11px] text-on-surface-variant truncate">
+              Lead Instructor • Neural NLP Specialist • Oxford / Cambridge Academic Board
+            </p>
+</div>
+</div>
+<!-- Header Actions -->
+<div class="flex items-center gap-2">
+<button class="p-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary/40 text-on-surface-variant hover:text-secondary text-xs transition-colors" title="Search in thread">
+<span class="material-symbols-outlined text-base">search</span>
+</button>
+<button class="px-2.5 py-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-secondary/40 text-on-surface-variant hover:text-secondary text-xs font-label flex items-center gap-1.5 transition-colors" title="View files shared in this conversation">
+<span class="material-symbols-outlined text-sm">folder_open</span>
+<span>Shared (3)</span>
+</button>
+<button class="p-1.5 rounded bg-surface-container border border-outline-variant/40 hover:border-outline text-on-surface-variant hover:text-on-surface text-xs transition-colors">
+<span class="material-symbols-outlined text-base">more_vert</span>
+</button>
+</div>
+</div>
+<!-- Linked Context Bar Banner -->
+<div class="px-5 py-2 bg-surface-container/90 border-b border-outline-variant/25 flex items-center justify-between text-xs font-label">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-primary text-sm">link</span>
+<span class="text-on-surface-variant text-[11px]">Bound Request:</span>
+<span class="font-medium text-on-surface truncate text-[11px]">Research Paper Originality Review (FBX-104582)</span>
+</div>
+<a class="text-secondary hover:text-secondary-fixed text-[11px] font-medium flex items-center gap-1 hover:underline shrink-0" href="#">
+<span>View Request Details</span>
+<span class="material-symbols-outlined text-xs">open_in_new</span>
+</a>
+</div>
+<!-- Scrollable Message Stream -->
+<div class="flex-1 overflow-y-auto p-5 space-y-4 scrollbar-thin bg-surface-dim/30">
+<!-- Date Divider -->
+<div class="flex items-center justify-center my-3">
+<div class="px-3 py-0.5 rounded-full bg-surface-container-high/80 border border-outline-variant/40 text-[10px] font-label uppercase tracking-widest text-on-surface-variant">
+            13 October 2026
+          </div>
+</div>
+<!-- Instructor Message 1 (Left) -->
+<div class="flex items-start gap-3 max-w-[85%] group">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-[11px] text-on-surface shrink-0 border border-outline-variant/50">
+            AS
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-headline font-semibold text-xs text-on-surface">Dr. Ananya Sharma</span>
+<span class="font-label text-[10px] text-on-surface-variant">09:30 AM</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tl-sm bg-surface-container border border-outline-variant/40 text-xs leading-relaxed text-on-surface shadow-sm">
+<p>
+                Hello! I’ve received your research paper and supporting references. I’ll review the submitted materials and start examining the similarity findings across our canonical indexing pipeline.
+              </p>
+<!-- Ledger File Reference Badge -->
+<div class="mt-2.5 p-2 rounded bg-surface-container-lowest/80 border border-outline-variant/30 flex items-center gap-2 text-[11px] font-label text-on-surface-variant">
+<span class="material-symbols-outlined text-secondary text-sm">verified</span>
+<span>Referenced dossier: 2 files verified in ledger (<span class="text-secondary font-medium">Research_Paper_Final.docx</span>, <span class="text-secondary font-medium">Supporting_References.pdf</span>)</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Student Message 1 (Right) -->
+<div class="flex items-start justify-end gap-3 max-w-[85%] ml-auto group">
+<div class="space-y-1 flex flex-col items-end">
+<div class="flex items-center gap-2">
+<span class="font-label text-[10px] text-on-surface-variant">09:42 AM</span>
+<span class="font-headline font-semibold text-xs text-primary">Elena Vance (You)</span>
+<span class="material-symbols-outlined text-xs text-secondary" title="Delivered to node">done_all</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tr-sm bg-surface-container-high border border-primary/30 text-xs leading-relaxed text-on-surface shadow-[inset_0_0_12px_rgba(255,45,120,0.06)]">
+<p>
+                Thank you. Please let me know if you need any additional references or clarification about the paper, particularly Section 3.2 on Transformer Self-Attention matrices.
+              </p>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center font-headline font-bold text-[11px] text-on-primary shrink-0 border border-primary/40">
+            EV
+          </div>
+</div>
+<!-- Instructor Message 2 (Left) -->
+<div class="flex items-start gap-3 max-w-[85%] group">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-[11px] text-on-surface shrink-0 border border-outline-variant/50">
+            AS
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-headline font-semibold text-xs text-on-surface">Dr. Ananya Sharma</span>
+<span class="font-label text-[10px] text-on-surface-variant">10:15 AM</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tl-sm bg-surface-container border border-outline-variant/40 text-xs leading-relaxed text-on-surface shadow-sm">
+<p>
+                I’ll let you know if anything else is required. For now, the submitted files are sufficient to begin the review. Syntactic trees are currently parsing in the secure sandbox.
+              </p>
+</div>
+</div>
+</div>
+<!-- Date Divider: Today -->
+<div class="flex items-center justify-center my-3">
+<div class="px-3 py-0.5 rounded-full bg-surface-container-high/80 border border-secondary/30 text-[10px] font-label uppercase tracking-widest text-secondary flex items-center gap-1.5">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span>
+            14 October 2026 (Today)
+          </div>
+</div>
+<!-- Instructor Message 3 (Left) -->
+<div class="flex items-start gap-3 max-w-[85%] group">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-[11px] text-on-surface shrink-0 border border-outline-variant/50">
+            AS
+          </div>
+<div class="space-y-1">
+<div class="flex items-center gap-2">
+<span class="font-headline font-semibold text-xs text-on-surface">Dr. Ananya Sharma</span>
+<span class="font-label text-[10px] text-on-surface-variant">11:20 AM</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tl-sm bg-surface-container border border-outline-variant/40 text-xs leading-relaxed text-on-surface shadow-sm space-y-2">
+<p>
+                I’ve started examining the similarity findings. The syntactic overlap in Section 3 appears to stem from canonical definitions rather than unoriginal formulation.
+              </p>
+<p>
+                I’ll share an update and marked draft when the initial comparative audit is compiled.
+              </p>
+</div>
+</div>
+</div>
+<!-- Student Message 2 (Right, with Attached File) -->
+<div class="flex items-start justify-end gap-3 max-w-[85%] ml-auto group">
+<div class="space-y-1 flex flex-col items-end">
+<div class="flex items-center gap-2">
+<span class="font-label text-[10px] text-on-surface-variant">11:24 AM</span>
+<span class="font-headline font-semibold text-xs text-primary">Elena Vance (You)</span>
+<span class="material-symbols-outlined text-xs text-secondary" title="Read by faculty">done_all</span>
+</div>
+<div class="p-3.5 rounded-2xl rounded-tr-sm bg-surface-container-high border border-primary/30 text-xs leading-relaxed text-on-surface space-y-3 shadow-[inset_0_0_12px_rgba(255,45,120,0.06)]">
+<p>
+                Thanks for the update. Could you also explain which sections may need closer attention? In the meantime, I've attached my supplementary methodology notes for reference.
+              </p>
+<!-- Embedded Compact File Card -->
+<div class="p-2.5 rounded bg-surface-container-lowest/90 border border-outline-variant/50 hover:border-secondary/40 transition-colors flex items-center justify-between gap-3">
+<div class="flex items-center gap-2.5 min-w-0">
+<div class="w-8 h-8 rounded bg-error-container/40 border border-error/30 flex items-center justify-center text-error font-label font-bold text-xs shrink-0">
+                    PDF
+                  </div>
+<div class="min-w-0">
+<p class="font-headline font-medium text-xs text-on-surface truncate">Research_Notes_Methodology.pdf</p>
+<p class="text-[10px] font-label text-on-surface-variant truncate">1.8 MB • Verified Document</p>
+</div>
+</div>
+<div class="flex items-center gap-1 shrink-0 font-label text-[11px]">
+<button class="px-2 py-0.5 rounded bg-surface-container hover:bg-surface-variant text-secondary transition-colors">Preview</button>
+<button class="p-1 rounded bg-surface-container hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-colors" title="Download">
+<span class="material-symbols-outlined text-sm">download</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full bg-primary-container flex items-center justify-center font-headline font-bold text-[11px] text-on-primary shrink-0 border border-primary/40">
+            EV
+          </div>
+</div>
+<!-- Typing / Active Review Indicator -->
+<div class="flex items-center gap-2.5 pt-2 text-on-surface-variant">
+<div class="w-6 h-6 rounded-full bg-surface-variant flex items-center justify-center text-[10px] font-bold text-on-surface-variant">
+            AS
+          </div>
+<div class="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-surface-container-high/60 border border-outline-variant/30 text-[11px] font-label">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse delay-150"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse delay-300"></span>
+<span class="ml-1 text-on-surface-variant/90">Dr. Ananya Sharma is reviewing the thread...</span>
+</div>
+</div>
+</div>
+<!-- ===================================================================== -->
+<!-- Bottom Message Composer                                              -->
+<!-- ===================================================================== -->
+<div class="p-4 bg-surface-container-low border-t border-outline-variant/35 space-y-2.5">
+<!-- Draft Attachment Preview Chip -->
+<div class="inline-flex items-center gap-2 px-2.5 py-1 rounded-md bg-surface-container-high/90 border border-secondary/30 text-xs font-label">
+<span class="material-symbols-outlined text-secondary text-sm">description</span>
+<span class="text-on-surface text-[11px]">Research_Notes_Addendum_Draft.pdf</span>
+<span class="text-on-surface-variant text-[10px]">(1.2 MB)</span>
+<div class="w-12 h-1 bg-surface-container-lowest rounded-full overflow-hidden mx-1">
+<div class="w-full h-full bg-secondary"></div>
+</div>
+<span class="text-[10px] text-secondary font-semibold">100% Ready</span>
+<button class="text-on-surface-variant hover:text-error ml-1 transition-colors" title="Remove attachment">
+<span class="material-symbols-outlined text-xs">close</span>
+</button>
+</div>
+<!-- Input Box -->
+<div class="relative rounded-lg bg-surface-container-high/60 border border-outline-variant/60 focus-within:border-secondary focus-within:shadow-[0_0_12px_rgba(0,255,204,0.15)] transition-all">
+<textarea class="w-full bg-transparent p-3 text-xs text-on-surface placeholder:text-on-surface-variant/50 focus:outline-none resize-none font-body leading-relaxed" placeholder="Write a message to Dr. Ananya Sharma... (Press ⌘+Enter to send)" rows="3"></textarea>
+<!-- Composer Controls Strip -->
+<div class="px-3 py-2 border-t border-outline-variant/30 flex items-center justify-between">
+<div class="flex items-center gap-1.5">
+<button class="p-1.5 rounded text-on-surface-variant hover:text-secondary hover:bg-surface-variant transition-colors" title="Attach Manuscript or Notes (.pdf, .docx, .tex)">
+<span class="material-symbols-outlined text-base">attach_file</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-secondary hover:bg-surface-variant transition-colors" title="Insert Code Snippet / Algorithm">
+<span class="material-symbols-outlined text-base">code</span>
+</button>
+<button class="p-1.5 rounded text-on-surface-variant hover:text-secondary hover:bg-surface-variant transition-colors" title="Academic Template Expressions">
+<span class="material-symbols-outlined text-base">text_snippet</span>
+</button>
+<span class="text-outline mx-1">•</span>
+<span class="hidden sm:inline-flex items-center gap-1 text-[10px] font-label text-on-surface-variant/80">
+<span class="material-symbols-outlined text-[12px] text-secondary">encrypted</span>
+                End-to-end encrypted ledger channel
+              </span>
+</div>
+<div class="flex items-center gap-3">
+<span class="text-[10px] font-label text-on-surface-variant">Draft saved</span>
+<button class="px-3.5 py-1.5 rounded bg-surface-container border border-primary text-primary hover:bg-primary hover:text-on-primary text-xs font-headline font-semibold flex items-center gap-1.5 glow-btn-hover transition-all">
+<span>Send Message</span>
+<span class="material-symbols-outlined text-sm">send</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- ========================================================================= -->
+<!-- COLUMN 3: Contextual Request Panel (Right-side persistent summary, 3 cols) -->
+<!-- ========================================================================= -->
+<aside class="col-span-12 xl:col-span-3 flex flex-col space-y-4">
+<!-- Top Request Context Card -->
+<div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/35 backdrop-blur-md space-y-4">
+<div class="flex items-center justify-between border-b border-outline-variant/30 pb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary text-lg">fact_check</span>
+<h3 class="font-headline font-bold text-xs uppercase tracking-wider text-on-surface">Request Context</h3>
+</div>
+<span class="px-2 py-0.5 rounded text-[10px] font-label font-bold bg-secondary-container/60 text-secondary border border-secondary/30">
+            In Progress
+          </span>
+</div>
+<!-- Request Details -->
+<div class="space-y-2.5 text-xs">
+<div>
+<div class="font-headline font-semibold text-sm text-on-surface">Research Paper Originality Review</div>
+<div class="flex items-center gap-2 mt-1">
+<span class="font-label text-[11px] text-secondary">REQ-FBX-104582</span>
+<button class="text-on-surface-variant hover:text-secondary text-xs" title="Copy Request ID">
+<span class="material-symbols-outlined text-sm">content_copy</span>
+</button>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-2 pt-2 border-t border-outline-variant/20 font-label text-[11px]">
+<div>
+<span class="text-on-surface-variant block text-[10px] uppercase">Discipline</span>
+<span class="text-on-surface font-medium">CS (NLP &amp; Trees)</span>
+</div>
+<div>
+<span class="text-on-surface-variant block text-[10px] uppercase">Level</span>
+<span class="text-on-surface font-medium">Senior Capstone</span>
+</div>
+<div>
+<span class="text-on-surface-variant block text-[10px] uppercase">Delivery Target</span>
+<span class="text-tertiary font-medium">18 Oct 2026 (3d)</span>
+</div>
+<div>
+<span class="text-on-surface-variant block text-[10px] uppercase">Escrow Locked</span>
+<span class="text-secondary font-medium">₹1,500</span>
+</div>
+</div>
+</div>
+<!-- Assigned Faculty Card -->
+<div class="p-3 rounded-lg bg-surface-container-high/60 border border-outline-variant/40 space-y-2">
+<div class="flex items-center gap-2.5">
+<div class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center font-headline font-bold text-xs text-on-surface border border-secondary/40">
+              AS
+            </div>
+<div class="min-w-0">
+<div class="font-headline font-semibold text-xs text-on-surface truncate">Dr. Ananya Sharma</div>
+<div class="text-[10px] text-on-surface-variant truncate">Assoc. Fellow, Algorithmic Originality</div>
+</div>
+</div>
+<div class="flex items-center justify-between text-[11px] font-label pt-1 border-t border-outline-variant/30">
+<div class="flex items-center gap-1 text-tertiary">
+<span class="material-symbols-outlined text-xs fill-1">star</span>
+<span class="font-bold">4.98</span>
+<span class="text-on-surface-variant text-[10px]">(142 reviews)</span>
+</div>
+<a class="text-secondary hover:underline flex items-center gap-0.5 text-[10px]" href="#">
+              Profile <span class="material-symbols-outlined text-[10px]">north_east</span>
+</a>
+</div>
+</div>
+</div>
+<!-- Shared Files Dossier -->
+<div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/35 backdrop-blur-md space-y-3">
+<div class="flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-base">inventory_2</span>
+<h4 class="font-headline font-bold text-xs uppercase tracking-wider text-on-surface">Shared Files Dossier</h4>
+</div>
+<span class="text-[10px] font-label text-on-surface-variant">3 files</span>
+</div>
+<div class="space-y-2">
+<!-- File Item 1 -->
+<div class="p-2 rounded bg-surface-container-high/50 border border-outline-variant/30 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-secondary text-base">description</span>
+<div class="min-w-0">
+<div class="font-medium text-on-surface truncate text-[11px]">Research_Paper_Final.docx</div>
+<div class="font-label text-[10px] text-on-surface-variant">4.8 MB • DOCX</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Preview"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Download"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+<!-- File Item 2 -->
+<div class="p-2 rounded bg-surface-container-high/50 border border-outline-variant/30 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-error text-base">picture_as_pdf</span>
+<div class="min-w-0">
+<div class="font-medium text-on-surface truncate text-[11px]">Supporting_References.pdf</div>
+<div class="font-label text-[10px] text-on-surface-variant">2.1 MB • PDF</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Preview"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Download"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+<!-- File Item 3 -->
+<div class="p-2 rounded bg-surface-container-high/50 border border-secondary/25 flex items-center justify-between text-xs">
+<div class="flex items-center gap-2 min-w-0">
+<span class="material-symbols-outlined text-secondary text-base">picture_as_pdf</span>
+<div class="min-w-0">
+<div class="font-medium text-secondary truncate text-[11px]">Research_Notes_Methodology.pdf</div>
+<div class="font-label text-[10px] text-on-surface-variant">1.8 MB • Shared Today</div>
+</div>
+</div>
+<div class="flex items-center gap-1">
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Preview"><span class="material-symbols-outlined text-sm">visibility</span></button>
+<button class="p-1 text-on-surface-variant hover:text-secondary" title="Download"><span class="material-symbols-outlined text-sm">download</span></button>
+</div>
+</div>
+</div>
+<a class="block text-center pt-1 text-[11px] font-label text-secondary hover:underline" href="#">
+          View All 3 Files in Secure Vault →
+        </a>
+</div>
+<!-- Quick Action Operations -->
+<div class="p-4 rounded-xl bg-surface-container-low/70 border border-outline-variant/35 backdrop-blur-md space-y-2 text-xs font-label">
+<h4 class="font-headline font-bold text-[11px] uppercase tracking-wider text-on-surface-variant mb-2">Actions</h4>
+<button class="w-full text-left p-2 rounded bg-surface-container hover:bg-surface-variant text-on-surface flex items-center justify-between transition-colors">
+<span>Open Request Details &amp; Timeline</span>
+<span class="material-symbols-outlined text-sm text-secondary">arrow_forward</span>
+</button>
+<button class="w-full text-left p-2 rounded bg-surface-container hover:bg-surface-variant text-on-surface flex items-center justify-between transition-colors">
+<span>Review Ledger Audit Trail</span>
+<span class="material-symbols-outlined text-sm text-primary">history_edu</span>
+</button>
+<button class="w-full text-left p-2 rounded bg-surface-container hover:bg-surface-variant text-on-surface flex items-center justify-between transition-colors">
+<span>Contact Academic Liaison</span>
+<span class="material-symbols-outlined text-sm text-tertiary">support_agent</span>
+</button>
+</div>
+</aside>
+</div>
+</div></main></div></body></html>

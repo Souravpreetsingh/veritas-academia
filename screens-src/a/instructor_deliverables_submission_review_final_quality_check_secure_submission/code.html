@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><meta content="web_dashboard" name="shell-type"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Sora:wght@600;700&amp;family=Space+Grotesk:wght@500;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}.neon-text-pink{text-shadow:0 0 8px #ff2d78;}.neon-text-cyan{text-shadow:0 0 8px #00ffcc;}.neon-glow-pink{box-shadow:0 0 16px rgba(255,45,120,0.35);}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { "colors": { "primary-fixed-dim": "#ff80aa", "on-secondary": "#001a1a", "inverse-primary": "#8c0038", "tertiary-container": "#665200", "tertiary": "#ffe04a", "surface-variant": "#1e1e30", "surface-container-low": "#111118", "primary": "#ff2d78", "on-tertiary-fixed": "#1a1000", "on-tertiary-container": "#fff0c0", "surface-container-highest": "#28283e", "inverse-surface": "#e8e0f0", "primary-container": "#b3004e", "outline": "#5a5068", "on-error": "#1a0000", "on-primary-fixed-variant": "#8c0038", "surface-tint": "#ff2d78", "on-background": "#e8e0f0", "secondary-fixed": "#c0fff4", "surface-bright": "#1a1a2e", "tertiary-fixed-dim": "#ffe04a", "surface-container-lowest": "#0a0a12", "inverse-on-surface": "#0a0a12", "on-error-container": "#ffa0a0", "error-container": "#3d0f0f", "on-primary-container": "#ffe0ec", "on-secondary-fixed": "#001a1a", "surface-container-high": "#1e1e30", "surface": "#0f0f1a", "on-primary": "#1a0010", "on-primary-fixed": "#3d0020", "on-secondary-container": "#c0fff4", "secondary-container": "#004d3d", "on-surface-variant": "#a098b0", "on-tertiary-fixed-variant": "#665200", "on-tertiary": "#1a1000", "on-secondary-fixed-variant": "#004d4d", "on-surface": "#e8e0f0", "outline-variant": "#302840", "background": "#0a0a12", "surface-container": "#141422", "surface-dim": "#0f0f1a", "secondary-fixed-dim": "#00e6b8", "error": "#ff4444", "secondary": "#00ffcc", "tertiary-fixed": "#fff0c0", "primary-fixed": "#ffe0ec" }, "borderRadius": { "DEFAULT": "0.125rem", "lg": "0.25rem", "xl": "0.5rem", "full": "0.75rem" }, "spacing": {}, "fontFamily": { "headline": ["Sora"], "display": ["Sora"], "body": ["Inter"], "label": ["Space Grotesk"] }, "fontSize": {} } } }</script></head><body class="bg-background font-body text-on-surface antialiased min-h-screen"><aside class="fixed left-0 top-0 h-full w-[260px] bg-surface-container-lowest z-50 flex flex-col justify-between border-r border-outline-variant/30"><div class="flex flex-col flex-1 overflow-y-auto"><div class="p-5 pb-4 border-b border-outline-variant/20"><div class="flex items-center gap-2.5"><div class="w-2 h-2 rounded-full bg-primary animate-pulse shadow-[0_0_10px_#ff2d78]"></div><span class="font-headline font-bold text-base tracking-wider text-on-surface">VERITAS ACADEMIA</span></div><div class="mt-1 text-[10px] font-label tracking-widest text-secondary uppercase neon-text-cyan">ACADEMIC VAULT • ORIGINALITY GRID 2.4</div></div><div class="px-3 py-4"><div class="px-3 pb-2 text-[10px] font-label font-bold tracking-widest uppercase text-on-surface-variant/70">Core Workspace</div><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold neon-glow-pink border-l-2 border-primary"><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="overview" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">grid_view</span><span class="font-medium">Overview</span></div></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="incoming-requests" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">inbox</span><span class="font-medium">Incoming Requests</span></div><span class="px-1.5 py-0.5 text-[10px] font-label font-bold rounded bg-primary text-on-primary">3</span></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="my-work" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">assignment</span><span class="font-medium">My Work</span></div><span class="px-1.5 py-0.5 text-[10px] font-label font-bold rounded bg-surface-container-highest text-secondary border border-secondary/30">5</span></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="messages" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">chat_bubble</span><span class="font-medium">Messages</span></div><span class="px-1.5 py-0.5 text-[10px] font-label font-bold rounded bg-secondary text-on-secondary">1 unread</span></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="students" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">school</span><span class="font-medium">Students</span></div></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="documents" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">description</span><span class="font-medium">Documents</span></div></a></nav></div><div class="px-3 py-2"><div class="px-3 pb-2 text-[10px] font-label font-bold tracking-widest uppercase text-on-surface-variant/70">Management &amp; Finance</div><nav class="space-y-1" data-active-classes="bg-primary-container text-on-primary-container font-semibold neon-glow-pink border-l-2 border-primary"><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="earnings" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">payments</span><span class="font-medium">Earnings</span></div></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="availability" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">event_available</span><span class="font-medium">Availability</span></div></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="profile" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">account_circle</span><span class="font-medium">Profile</span></div></a><a class="flex items-center justify-between px-3 py-2 text-xs rounded text-on-surface-variant hover:bg-surface-container-high hover:text-on-surface transition-all" data-path="settings" href="#"><div class="flex items-center gap-3"><span class="material-symbols-outlined text-[18px]">tune</span><span class="font-medium">Settings</span></div></a></nav></div></div><div class="p-3.5 m-3 rounded bg-surface-container border border-outline-variant/30"><div class="flex items-start gap-3"><div class="relative flex-shrink-0"><div class="w-9 h-9 rounded bg-surface-container-highest flex items-center justify-center border border-primary/40"><span class="material-symbols-outlined text-primary text-[20px]">psychology</span></div><span class="absolute -bottom-1 -right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-surface-container-lowest"><span class="material-symbols-outlined text-secondary text-[12px]">verified</span></span></div><div class="flex-1 min-w-0"><div class="text-xs font-semibold text-on-surface truncate">Dr. Ananya Sharma</div><div class="text-[10px] text-on-surface-variant truncate font-label">Senior Faculty Fellow</div><div class="text-[9px] text-secondary truncate font-label">Oxford / Cambridge Exch.</div></div></div></div></aside><div class="pl-[260px]"><header class="fixed top-0 left-[260px] right-0 h-16 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/20 z-40 px-6"><div class="h-full w-full flex items-center justify-between gap-6"><div class="flex items-center gap-4 min-w-max"><div class="flex items-center gap-1.5 text-xs font-label text-on-surface-variant"><span class="text-on-surface-variant/80">Instructor Portal</span><span class="text-outline-variant">/</span><span class="text-secondary font-medium">Overview</span></div><div class="h-4 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-2 px-2.5 py-1 rounded bg-surface-container border border-outline-variant/20 text-[10px] font-label text-on-surface-variant"><span class="w-1.5 h-1.5 rounded-full bg-secondary animate-ping"></span><span class="font-mono">INSTRUCTOR NODE WITNESS • Synced #8491</span></div></div><div class="flex-1 max-w-xl"><div class="relative flex items-center w-full"><span class="material-symbols-outlined absolute left-3 text-[18px] text-on-surface-variant/60">search</span><input class="w-full h-9 pl-9 pr-4 rounded bg-surface-container-low border border-outline-variant/30 text-xs text-on-surface placeholder-on-surface-variant/50 focus:outline-none focus:border-secondary focus:ring-1 focus:ring-secondary/40 font-body transition-all" placeholder="Search student requests, IDs, manuscripts, or messages... (⌘K)" type="text"/></div></div><div class="flex items-center gap-3.5 min-w-max"><div class="hidden xl:flex items-center px-2.5 py-1 rounded bg-surface-container-high border border-outline-variant/30 text-[10px] font-label text-tertiary"><span class="material-symbols-outlined text-[14px] mr-1 text-tertiary">history_edu</span>Fall 2025 Review Cycle</div><button class="relative p-2 rounded hover:bg-surface-container-high text-on-surface-variant hover:text-on-surface transition-colors"><span class="material-symbols-outlined text-[20px]">notifications</span><span class="absolute top-1.5 right-1.5 w-2 h-2 rounded-full bg-primary shadow-[0_0_8px_#ff2d78]"></span></button><div class="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-secondary-container/40 border border-secondary/40 text-[11px] font-label text-secondary"><span class="w-1.5 h-1.5 rounded-full bg-secondary shadow-[0_0_6px_#00ffcc]"></span><span>Available for Requests</span></div><div class="h-4 w-[1px] bg-outline-variant/40"></div><div class="flex items-center gap-2.5 pl-1 cursor-pointer"><div class="text-right hidden sm:block"><div class="text-xs font-semibold text-on-surface leading-tight">Dr. Ananya</div><div class="text-[10px] text-on-surface-variant font-label">(Instructor)</div></div><div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center shadow-[0_0_10px_rgba(255,45,120,0.4)]"><span class="material-symbols-outlined text-on-primary text-[18px]">person</span></div></div></div></div></header><main class="w-full pt-16 bg-background min-h-screen px-8 py-6"><div class="flex flex-col w-full">
+<!-- Top Command & Breadcrumb Strip -->
+<div class="flex flex-col lg:flex-row lg:items-center justify-between gap-4 mb-6">
+<div class="flex flex-col gap-1.5">
+<div class="flex items-center gap-2 text-xs font-label text-on-surface-variant">
+<a class="hover:text-secondary transition-colors" href="#">Instructor Workspace</a>
+<span>/</span>
+<a class="hover:text-secondary transition-colors" href="#">My Work</a>
+<span>/</span>
+<span class="text-on-surface font-mono">FBX-104621</span>
+<span>/</span>
+<span class="text-secondary font-medium">Submission Review</span>
+</div>
+<div class="flex items-center gap-4">
+<a class="inline-flex items-center gap-1.5 text-xs font-label text-secondary hover:text-secondary-fixed transition-colors" href="#">
+<span class="material-symbols-outlined text-[16px]">arrow_back</span>
+          Back to Assignment Workspace (FBX-104621)
+        </a>
+<div class="h-3 w-[1px] bg-surface-container-highest"></div>
+<span class="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-label font-bold uppercase bg-surface-container-high text-tertiary">
+<span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          Milestone 5 of 7 : Quality Sign-Off
+        </span>
+</div>
+<h1 class="text-2xl lg:text-3xl font-headline font-bold text-on-surface tracking-tight mt-1">
+        Deliverables &amp; Submission Review
+      </h1>
+<p class="text-xs text-on-surface-variant max-w-3xl leading-relaxed">
+        Conduct final quality assurance, verify deliverables against agreed scope, and cryptographically seal submission files for student dispatch.
+      </p>
+</div>
+<!-- Simulation Controls Floating Bar -->
+<div class="flex flex-wrap items-center gap-2 self-start lg:self-center p-1.5 rounded-lg bg-surface-container-low shadow-md">
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-highest text-secondary text-xs font-label font-medium transition-all" onclick="toggleModal('modal-student-preview')">
+<span class="material-symbols-outlined text-[16px]">visibility</span>
+        Preview Student View
+      </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-highest text-on-surface text-xs font-label font-medium transition-all" onclick="toggleModal('modal-submit-confirm')">
+<span class="material-symbols-outlined text-[16px]">task_alt</span>
+        Test Submit Modal
+      </button>
+<button class="flex items-center gap-1.5 px-3 py-1.5 rounded bg-surface-container hover:bg-surface-container-highest text-primary text-xs font-label font-medium transition-all" onclick="toggleModal('modal-success-state')">
+<span class="material-symbols-outlined text-[16px]">verified</span>
+        View Success State
+      </button>
+</div>
+</div>
+<!-- Dossier Metadata Strip -->
+<div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-3 mb-6 p-4 rounded-xl bg-surface-container-low shadow-lg">
+<div class="flex flex-col">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Request ID</span>
+<span class="font-mono text-xs font-bold text-secondary mt-0.5">FBX-104621</span>
+</div>
+<div class="flex flex-col col-span-2">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Assignment</span>
+<span class="text-xs font-semibold text-on-surface truncate mt-0.5">Research Report Analysis &amp; Originality</span>
+</div>
+<div class="flex flex-col col-span-2">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Scholar</span>
+<div class="flex items-center gap-1.5 mt-0.5">
+<span class="text-xs font-semibold text-on-surface truncate">Alex Morgan</span>
+<span class="text-[9px] font-mono px-1 rounded bg-surface-container-high text-on-surface-variant">STU-20481</span>
+</div>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Target Deadline</span>
+<span class="text-xs font-semibold text-tertiary mt-0.5 flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> 17 Oct 2026
+      </span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Confirmed Escrow</span>
+<span class="text-xs font-bold text-secondary font-mono mt-0.5">$85.00 USD</span>
+</div>
+<div class="flex flex-col">
+<span class="text-[10px] font-label uppercase tracking-widest text-on-surface-variant">Vault Status</span>
+<span class="text-[10px] font-label font-bold text-primary mt-0.5 uppercase tracking-wider">Locked Staged</span>
+</div>
+</div>
+<!-- Readiness Overview Banner & Interactive Meter -->
+<div class="p-5 mb-8 rounded-xl bg-gradient-to-r from-surface-container to-surface-container-low shadow-xl relative overflow-hidden">
+<div class="absolute -right-12 -top-12 w-48 h-48 rounded-full bg-secondary/5 blur-3xl pointer-events-none"></div>
+<div class="flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4 mb-4">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-surface-container-highest flex items-center justify-center text-secondary shadow-md">
+<span class="material-symbols-outlined text-[24px]">verified_user</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-headline font-bold text-on-surface tracking-wide">
+              Submission Readiness: 75% Complete
+            </span>
+<span class="text-[10px] font-label px-2 py-0.5 rounded-full bg-tertiary-container/60 text-tertiary font-bold uppercase">
+              3 of 4 Quality Checks Passed
+            </span>
+</div>
+<p class="text-[11px] text-on-surface-variant mt-0.5">
+            Acknowledge final pedagogical compliance certification to unlock student dispatch.
+          </p>
+</div>
+</div>
+<div class="flex items-center gap-3">
+<div class="text-right hidden sm:block">
+<div class="text-[10px] font-label uppercase text-on-surface-variant">Cryptographic Anchor</div>
+<div class="font-mono text-xs text-secondary">SHA-256 WITNESS #8491</div>
+</div>
+<div class="w-2.5 h-2.5 rounded-full bg-secondary animate-ping"></div>
+</div>
+</div>
+<!-- 4 Readiness Pillars Pipeline -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 pt-2">
+<!-- Pillar 1 -->
+<div class="p-3 rounded-lg bg-surface-container-high/60 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-label font-bold uppercase tracking-wider text-on-surface-variant">1. Deliverable Files</span>
+<span class="text-[10px] font-label font-bold text-secondary uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> READY
+          </span>
+</div>
+<div class="text-xs font-semibold text-on-surface">4 of 4 Files Prepared</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">3 Uploaded • 1 Staged Draft</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2.5 overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+</div>
+<!-- Pillar 2 -->
+<div class="p-3 rounded-lg bg-surface-container-high/60 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-label font-bold uppercase tracking-wider text-on-surface-variant">2. Scope Checklist</span>
+<span class="text-[10px] font-label font-bold text-tertiary uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">pending</span> PENDING
+          </span>
+</div>
+<div class="text-xs font-semibold text-on-surface">3 of 4 Marked Checked</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">1 Final Sign-off required</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2.5 overflow-hidden">
+<div class="h-full bg-tertiary w-3/4"></div>
+</div>
+</div>
+<!-- Pillar 3 -->
+<div class="p-3 rounded-lg bg-surface-container-high/60 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-label font-bold uppercase tracking-wider text-on-surface-variant">3. Quality Verification</span>
+<span class="text-[10px] font-label font-bold text-tertiary uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">rule</span> 7/8 AUDITS
+          </span>
+</div>
+<div class="text-xs font-semibold text-on-surface">7 of 8 Verification Checks</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Pending Charter Certification</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2.5 overflow-hidden">
+<div class="h-full bg-tertiary w-[87.5%]"></div>
+</div>
+</div>
+<!-- Pillar 4 -->
+<div class="p-3 rounded-lg bg-surface-container-high/60 shadow-sm flex flex-col justify-between">
+<div class="flex items-center justify-between mb-2">
+<span class="text-[10px] font-label font-bold uppercase tracking-wider text-on-surface-variant">4. Scholar Note</span>
+<span class="text-[10px] font-label font-bold text-secondary uppercase flex items-center gap-1">
+<span class="material-symbols-outlined text-[13px]">check_circle</span> READY
+          </span>
+</div>
+<div class="text-xs font-semibold text-on-surface">Composed &amp; Autosaved</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">382 / 1,500 chars recorded</div>
+<div class="w-full h-1 bg-surface-container-highest rounded-full mt-2.5 overflow-hidden">
+<div class="h-full bg-secondary w-full"></div>
+</div>
+</div>
+</div>
+</div>
+<!-- Main 2-Column Desktop Grid Layout -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+<!-- LEFT COLUMN: Primary Work & Verification Zone (65% / 8 Cols) -->
+<div class="lg:col-span-8 flex flex-col gap-8 min-w-0">
+<!-- Section 1: Agreed Deliverables Verification Checklist -->
+<div class="p-6 rounded-xl bg-surface-container shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+<div>
+<h2 class="text-base font-headline font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">fact_check</span>
+              Agreed Deliverables Checklist (Contract Scope)
+            </h2>
+<p class="text-xs text-on-surface-variant mt-0.5">
+              Confirm each item stipulated in Academic &amp; Research Support milestone agreement #8491.
+            </p>
+</div>
+<span class="text-[11px] font-mono text-on-surface-variant">4 Contract Milestones</span>
+</div>
+<div class="flex flex-col gap-3">
+<!-- Item 1 -->
+<div class="p-4 rounded-lg bg-surface-container-low transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 p-1 rounded bg-secondary-container/60 text-secondary">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-xs font-semibold text-on-surface">1. Detailed Review Comments &amp; Marginalia</span>
+<span class="text-[10px] font-label font-bold px-2 py-0.2 rounded-full bg-secondary-container/40 text-secondary">Checked &amp; Verified</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                    Line-by-line observations on logic flow, hypothesis clarity, and empirical methodology.
+                  </p>
+<div class="flex items-center gap-3 mt-2 text-[11px] font-mono text-on-surface-variant">
+<span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-primary">description</span> Research_Report_Review_Comments.docx</span>
+<span>•</span>
+<span>1.2 MB</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary text-xs font-label font-medium transition-colors whitespace-nowrap self-start">
+                Re-inspect
+              </button>
+</div>
+</div>
+<!-- Item 2 -->
+<div class="p-4 rounded-lg bg-surface-container-low transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 p-1 rounded bg-secondary-container/60 text-secondary">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-xs font-semibold text-on-surface">2. Citation &amp; Reference Consistency Observations</span>
+<span class="text-[10px] font-label font-bold px-2 py-0.2 rounded-full bg-secondary-container/40 text-secondary">Checked &amp; Verified</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                    Cross-reference of 42 citations against APA 7th standards; identified missing Vance (2021) entry.
+                  </p>
+<div class="flex items-center gap-3 mt-2 text-[11px] font-mono text-on-surface-variant">
+<span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-primary">picture_as_pdf</span> Citation_Consistency_Notes.pdf</span>
+<span>•</span>
+<span>540 KB</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary text-xs font-label font-medium transition-colors whitespace-nowrap self-start">
+                Re-inspect
+              </button>
+</div>
+</div>
+<!-- Item 3 -->
+<div class="p-4 rounded-lg bg-surface-container-low transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 p-1 rounded bg-secondary-container/60 text-secondary">
+<span class="material-symbols-outlined text-[18px]">done_all</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-xs font-semibold text-on-surface">3. Structural &amp; Formatting Recommendations</span>
+<span class="text-[10px] font-label font-bold px-2 py-0.2 rounded-full bg-secondary-container/40 text-secondary">Checked &amp; Verified</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                    Diagnostic observations on Section 3 methodology partition and heading hierarchy.
+                  </p>
+<div class="flex items-center gap-3 mt-2 text-[11px] font-mono text-on-surface-variant">
+<span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-primary">description</span> Structure_and_Formatting_Feedback.docx</span>
+<span>•</span>
+<span>850 KB</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-secondary text-xs font-label font-medium transition-colors whitespace-nowrap self-start">
+                Re-inspect
+              </button>
+</div>
+</div>
+<!-- Item 4 (Actionable) -->
+<div class="p-4 rounded-lg bg-surface-container-low shadow-sm transition-all">
+<div class="flex flex-col sm:flex-row sm:items-start justify-between gap-3">
+<div class="flex items-start gap-3">
+<div class="mt-0.5 p-1 rounded bg-tertiary-container/60 text-tertiary">
+<span class="material-symbols-outlined text-[18px]">warning</span>
+</div>
+<div class="min-w-0">
+<div class="flex items-center gap-2 flex-wrap">
+<span class="text-xs font-semibold text-on-surface">4. Final Diagnostic Improvement Summary Memo</span>
+<span class="text-[10px] font-label font-bold px-2 py-0.2 rounded-full bg-tertiary-container/50 text-tertiary">Ready for Final Sign-Off</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-1 leading-relaxed">
+                    Comprehensive 2-page synthesis memo summarizing prioritized authorial revisions.
+                  </p>
+<div class="flex items-center gap-3 mt-2 text-[11px] font-mono text-on-surface-variant">
+<span class="flex items-center gap-1 text-on-surface"><span class="material-symbols-outlined text-[14px] text-primary">picture_as_pdf</span> Final_Review_Summary.pdf</span>
+<span>•</span>
+<span>320 KB</span>
+<span>•</span>
+<span class="text-tertiary font-semibold">Staged Draft</span>
+</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-label font-bold transition-all whitespace-nowrap shadow-md self-start" onclick="markItemVerified(this)">
+                Complete Final Check
+              </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 2: Attached Deliverables Repository Table & Dropzone -->
+<div class="p-6 rounded-xl bg-surface-container shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-4">
+<div>
+<h2 class="text-base font-headline font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">folder_zip</span>
+              Release Deliverables Repository
+            </h2>
+<p class="text-xs text-on-surface-variant mt-0.5">
+              Target bundle payload: 4 verified artifacts (2.91 MB total) sealed on Instructor Node #8491.
+            </p>
+</div>
+<span class="text-[11px] font-mono text-secondary">SHA-256 HASH VERIFIED</span>
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs">
+<thead>
+<tr class="bg-surface-container-high text-on-surface-variant font-label text-[10px] uppercase tracking-wider">
+<th class="py-2.5 px-3 rounded-l">Deliverable Artifact</th>
+<th class="py-2.5 px-3">Category</th>
+<th class="py-2.5 px-3">Checksum (SHA-256)</th>
+<th class="py-2.5 px-3">State / Timestamp</th>
+<th class="py-2.5 px-3 text-right rounded-r">Actions</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-outline-variant/20 font-body">
+<!-- Row 1 (Active Preview) -->
+<tr class="bg-surface-container-high/40">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]">description</span>
+<div>
+<div class="font-medium text-on-surface">Research_Report_Review_Comments.docx</div>
+<div class="text-[10px] text-on-surface-variant font-mono">1.2 MB</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Review Comments</td>
+<td class="py-3 px-3 font-mono text-[11px] text-secondary">4f8b9e11...2c</td>
+<td class="py-3 px-3">
+<span class="text-[10px] font-label font-bold text-secondary">Uploaded</span>
+<div class="text-[10px] text-on-surface-variant">Today 11:30 AM</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1.5">
+<span class="px-2 py-0.5 rounded bg-secondary-container/40 text-secondary text-[10px] font-label font-bold">Preview Active</span>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Download">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Replace">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 2 -->
+<tr class="hover:bg-surface-container-high/20 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]">picture_as_pdf</span>
+<div>
+<div class="font-medium text-on-surface">Citation_Consistency_Notes.pdf</div>
+<div class="text-[10px] text-on-surface-variant font-mono">540 KB</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Citation Observations</td>
+<td class="py-3 px-3 font-mono text-[11px] text-secondary">9a2c145f...77</td>
+<td class="py-3 px-3">
+<span class="text-[10px] font-label font-bold text-secondary">Uploaded</span>
+<div class="text-[10px] text-on-surface-variant">Today 11:42 AM</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface text-[10px] font-label">Preview</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Download">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Replace">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 3 -->
+<tr class="hover:bg-surface-container-high/20 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]">description</span>
+<div>
+<div class="font-medium text-on-surface">Structure_and_Formatting_Feedback.docx</div>
+<div class="text-[10px] text-on-surface-variant font-mono">850 KB</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Structural Feedback</td>
+<td class="py-3 px-3 font-mono text-[11px] text-secondary">e31d784a...10</td>
+<td class="py-3 px-3">
+<span class="text-[10px] font-label font-bold text-secondary">Uploaded</span>
+<div class="text-[10px] text-on-surface-variant">Today 11:45 AM</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface text-[10px] font-label">Preview</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Download">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Replace">
+<span class="material-symbols-outlined text-[16px]">swap_horiz</span>
+</button>
+</div>
+</td>
+</tr>
+<!-- Row 4 -->
+<tr class="hover:bg-surface-container-high/20 transition-colors">
+<td class="py-3 px-3">
+<div class="flex items-center gap-2.5">
+<span class="material-symbols-outlined text-primary text-[18px]">picture_as_pdf</span>
+<div>
+<div class="font-medium text-on-surface">Final_Review_Summary.pdf</div>
+<div class="text-[10px] text-on-surface-variant font-mono">320 KB</div>
+</div>
+</div>
+</td>
+<td class="py-3 px-3 text-on-surface-variant">Final Summary Memo</td>
+<td class="py-3 px-3 font-mono text-[11px] text-tertiary">d84f18ac...90</td>
+<td class="py-3 px-3">
+<span class="text-[10px] font-label font-bold text-tertiary">Staged Draft</span>
+<div class="text-[10px] text-on-surface-variant">12 mins ago</div>
+</td>
+<td class="py-3 px-3 text-right">
+<div class="inline-flex items-center gap-1.5">
+<button class="px-2 py-0.5 rounded bg-surface-container-highest text-on-surface-variant hover:text-on-surface text-[10px] font-label">Preview</button>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface hover:bg-surface-container-highest" title="Download">
+<span class="material-symbols-outlined text-[16px]">download</span>
+</button>
+<button class="px-2 py-0.5 rounded bg-primary text-on-primary hover:bg-primary-container text-[10px] font-label font-bold">Finalize</button>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<!-- Supplementary Upload Dropzone -->
+<div class="mt-4 p-5 rounded-lg bg-surface-container-low text-center hover:bg-surface-container-high/30 transition-all cursor-pointer">
+<div class="flex flex-col items-center justify-center gap-2">
+<div class="w-9 h-9 rounded-full bg-surface-container-highest flex items-center justify-center text-secondary">
+<span class="material-symbols-outlined text-[20px]">cloud_upload</span>
+</div>
+<div class="text-xs font-semibold text-on-surface">
+              + Add Additional Supplementary File or Appendix
+            </div>
+<div class="text-[10px] text-on-surface-variant font-label">
+              Supports .docx, .pdf, .tex, .md up to 25 MB • Dynamic cryptographic hash computed locally before staged indexing.
+            </div>
+</div>
+</div>
+</div>
+<!-- Section 3: Deliverable Document Inspection Viewport -->
+<div class="p-6 rounded-xl bg-surface-container shadow-xl">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 mb-4">
+<div class="flex items-center gap-3">
+<div class="p-2 rounded bg-surface-container-highest text-primary">
+<span class="material-symbols-outlined text-[22px]">description</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<span class="text-sm font-semibold text-on-surface">Research_Report_Review_Comments.docx</span>
+<span class="px-1.5 py-0.5 rounded text-[9px] font-mono bg-secondary-container/40 text-secondary">SHA-256 SEALED</span>
+</div>
+<div class="text-[10px] font-label text-on-surface-variant mt-0.5">
+                Manuscript Diagnostics Viewport • 6 Pages Rendered
+              </div>
+</div>
+</div>
+<div class="flex items-center gap-2 self-start sm:self-auto">
+<div class="flex items-center bg-surface-container-high rounded px-2 py-1 text-xs font-mono text-on-surface-variant">
+<span>Page 1 of 6</span>
+</div>
+<div class="flex items-center bg-surface-container-high rounded p-1 text-on-surface-variant">
+<button class="p-1 hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">zoom_out</span></button>
+<span class="text-[10px] font-mono px-1.5">100%</span>
+<button class="p-1 hover:text-on-surface"><span class="material-symbols-outlined text-[16px]">zoom_in</span></button>
+</div>
+<button class="flex items-center gap-1 px-3 py-1.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-xs font-label text-on-surface transition-colors">
+<span class="material-symbols-outlined text-[16px]">download</span>
+              Signed Copy
+            </button>
+</div>
+</div>
+<!-- Rendered Academic Sheet -->
+<div class="p-6 sm:p-8 rounded-lg bg-surface-container-lowest shadow-2xl relative">
+<!-- Document Header -->
+<div class="flex items-start justify-between pb-6 mb-6">
+<div>
+<span class="text-[10px] font-mono tracking-widest uppercase text-secondary">VERITAS ACADEMIA DIAGNOSTIC DISPATCH</span>
+<h3 class="text-base sm:text-lg font-headline font-bold text-on-surface tracking-wide mt-1">
+                FACULTY DIAGNOSTIC REVIEW — MS-2026-9918-B
+              </h3>
+<div class="flex items-center gap-4 mt-2 text-xs font-label text-on-surface-variant">
+<span>Author: <strong class="text-on-surface">Alex Morgan</strong> (Oxford Fellow)</span>
+<span>•</span>
+<span>Reviewer: <strong class="text-on-surface">Dr. Ananya Sharma</strong> (Faculty Fellow)</span>
+</div>
+</div>
+<div class="text-right hidden sm:block">
+<div class="font-mono text-[10px] text-on-surface-variant">NODE: #8491-OXFORD</div>
+<div class="text-[10px] font-label text-secondary mt-0.5">ORIGINALITY SCORE: PASSED</div>
+</div>
+</div>
+<!-- Document Body Simulation -->
+<div class="space-y-5 text-xs text-on-surface leading-relaxed font-body">
+<div>
+<h4 class="text-xs font-bold font-headline uppercase tracking-wider text-secondary mb-2">
+                1.0 Executive Assessment &amp; Scope Alignment
+              </h4>
+<p class="text-on-surface-variant">
+                This diagnostic audit reviews the manuscript entitled <em>"Decentralized Capital Formation &amp; Liquidity Governance across European Energy Sectors"</em>. The conceptual framework bridges macro-governance and localized algorithmic clearing. All structural critiques below are framed as non-directive authorial observations to maintain student work purity and compliance with Veritas Academia Faculty Charter v4.1.
+              </p>
+</div>
+<!-- Annotated Section with Callout -->
+<div class="p-4 rounded-lg bg-surface-container-high/40 relative">
+<p class="italic text-on-surface-variant/90 pl-3">
+                "By aggregating weekly clearing volumes across ten regional power nodes, the econometric model anticipates liquidity drift up to 14.8% prior to spot-market reconciliation..."
+              </p>
+<!-- Neon Marginalia Callout -->
+<div class="mt-3.5 p-3 rounded bg-surface-container-lowest shadow-md">
+<div class="flex items-center gap-2 mb-1">
+<span class="material-symbols-outlined text-secondary text-[16px]">rate_review</span>
+<span class="text-[11px] font-label font-bold text-secondary uppercase tracking-wider">
+                    [Note #01 - Epistemic Cohesion]
+                  </span>
+<span class="text-[10px] font-mono text-on-surface-variant ml-auto">Dr. Sharma • Page 1 ¶ 3</span>
+</div>
+<p class="text-xs text-on-surface pl-6 leading-relaxed">
+                  The empirical corpus parameters in Section 3.1 provide a robust methodological baseline. Recommend cross-verifying sample variance in Table 2 before final department submission, specifically validating whether outlier node 7 skews the aggregate confidence interval.
+                </p>
+</div>
+</div>
+<div>
+<h4 class="text-xs font-bold font-headline uppercase tracking-wider text-secondary mb-2">
+                2.0 Citation Discrepancy Matrix (APA 7th Audit)
+              </h4>
+<p class="text-on-surface-variant">
+                In-text cross-referencing completed for all 42 academic entries. Note that the reference to <em>Vance (2021)</em> on page 14 does not correspond to an entry in the concluding bibliography section. Full tabular discrepancies are cataloged in supplementary document <span class="text-secondary font-mono">Citation_Consistency_Notes.pdf</span>.
+              </p>
+</div>
+</div>
+</div>
+</div>
+<!-- Section 4: Quality Assurance & Pedagogical Boundary Checklist -->
+<div class="p-6 rounded-xl bg-surface-container shadow-xl">
+<div class="flex items-center justify-between mb-4">
+<div>
+<h2 class="text-base font-headline font-bold text-on-surface flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">checklist_rtl</span>
+              Quality Assurance &amp; Pedagogical Boundary Checklist
+            </h2>
+<p class="text-xs text-on-surface-variant mt-0.5">
+              8 mandatory checks must be fulfilled prior to cryptographic sealing and student notification.
+            </p>
+</div>
+<span class="text-xs font-mono font-bold text-tertiary" id="qa-counter-badge">7 / 8 Verified</span>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-3">
+<!-- Check 1 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">1. Agreed Deliverables Attached</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">All 4 contract deliverables verified in staging directory.</div>
+</div>
+</label>
+<!-- Check 2 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">2. Hash Integrity Confirmed</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Files open cleanly and SHA-256 match local node digest.</div>
+</div>
+</label>
+<!-- Check 3 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">3. Scope Boundary Adherence</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Feedback strictly aligns with agreed Business Mgmt level.</div>
+</div>
+</label>
+<!-- Check 4 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">4. Student Authorship Preserved</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Diagnostic critique only; zero ghostwritten text inserted.</div>
+</div>
+</label>
+<!-- Check 5 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">5. Citation Discrepancies Audited</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">Observations isolated from qualitative hypotheses.</div>
+</div>
+</label>
+<!-- Check 6 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">6. Unsupported Claims Safeguard</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">No unverified external plagiarism/AI metrics asserted.</div>
+</div>
+</label>
+<!-- Check 7 -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low cursor-pointer hover:bg-surface-container-high/40 transition-colors">
+<input checked="" class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" type="checkbox"/>
+<div class="text-xs">
+<div class="font-medium text-on-surface">7. Strict Data Privacy Compliance</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">No unrelated student manuscripts or telemetry bundled.</div>
+</div>
+</label>
+<!-- Check 8 (Actionable certification) -->
+<label class="flex items-start gap-3 p-3 rounded-lg bg-surface-container-low shadow-sm cursor-pointer transition-colors" id="charter-check-container">
+<input class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" id="charter-checkbox" onchange="toggleCharterCertification(this)" type="checkbox"/>
+<div class="text-xs">
+<div class="font-bold text-on-surface flex items-center gap-1.5">
+<span>8. Final Charter Certification</span>
+<span class="text-[9px] font-mono px-1 rounded bg-tertiary-container text-tertiary">REQUIRED</span>
+</div>
+<div class="text-[10px] text-on-surface-variant mt-0.5">
+                "I certify that this diagnostic review complies with Veritas Academia Faculty Charter v4.1."
+              </div>
+</div>
+</label>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Submission Dispatch, Message & Safeguards (35% / 4 Cols) -->
+<div class="lg:col-span-4 flex flex-col gap-6 sticky top-20">
+<!-- Card 1: Package Summary Card -->
+<div class="p-5 rounded-xl bg-surface-container shadow-xl">
+<div class="flex items-center justify-between pb-3 mb-3">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[18px]">inventory_2</span>
+<span class="text-xs font-headline font-bold text-on-surface uppercase tracking-wider">Submission Package</span>
+</div>
+<span class="text-[10px] font-mono text-secondary">SEAL READY</span>
+</div>
+<div class="space-y-3 text-xs">
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Recipient:</span>
+<span class="font-semibold text-on-surface flex items-center gap-1">
+              Alex Morgan <span class="text-[10px] font-mono text-secondary">(STU-20481)</span>
+</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Bundle Contents:</span>
+<span class="font-mono text-on-surface">4 Files (2.91 MB)</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Witness Protocol:</span>
+<span class="font-mono text-secondary">Immutable Node #8491</span>
+</div>
+<div class="flex justify-between items-center py-1">
+<span class="text-on-surface-variant">Escrow Release:</span>
+<span class="font-mono font-bold text-tertiary">$85.00 USD</span>
+</div>
+</div>
+<div class="mt-4 p-3 rounded-lg bg-surface-container-low text-[11px] text-on-surface-variant leading-relaxed">
+<div class="flex items-center gap-1.5 text-secondary font-label font-bold mb-1">
+<span class="material-symbols-outlined text-[14px]">shield</span>
+            Smart Escrow Safe-Release
+          </div>
+          Upon dispatch, the student enters a 72-hour review window. Escrow funds unlock automatically after student approval or window expiration without dispute.
+        </div>
+</div>
+<!-- Card 2: Scholar Submission Message Composer -->
+<div class="p-5 rounded-xl bg-surface-container shadow-xl">
+<div class="flex items-center justify-between pb-3 mb-3">
+<div>
+<h3 class="text-xs font-headline font-bold text-on-surface flex items-center gap-1.5 uppercase tracking-wider">
+<span class="material-symbols-outlined text-secondary text-[18px]">chat</span>
+              Submission Message
+            </h3>
+<p class="text-[10px] text-on-surface-variant mt-0.5">Visible to Alex Morgan upon delivery</p>
+</div>
+<span class="text-[10px] font-label text-secondary flex items-center gap-1">
+<span class="w-1.5 h-1.5 rounded-full bg-secondary"></span> Autosaved
+          </span>
+</div>
+<div class="relative">
+<textarea class="w-full p-3 rounded-lg bg-surface-container-low text-xs text-on-surface font-body leading-relaxed focus:outline-none focus:ring-1 focus:ring-secondary/50 placeholder-on-surface-variant/40 resize-none" id="submission-message-box" oninput="updateCharCount(this)" rows="7">Hello Alex,
+
+I've completed the comprehensive review of your research report and attached the 4 diagnostic feedback files covering the agreed scope. Please review the attached documents for observations on citation consistency, structure, formatting, and recommended improvements.
+
+The feedback is intended to support your own revisions and preserve your authorship. Let me know if any marginalia remarks need additional clarification.
+
+Best regards,
+Dr. Ananya Sharma</textarea>
+<div class="flex items-center justify-between mt-2 text-[10px] font-mono text-on-surface-variant">
+<span id="message-char-count">382 / 1,500 characters</span>
+<button class="text-secondary hover:text-secondary-fixed transition-colors">Revert to Template</button>
+</div>
+</div>
+</div>
+<!-- Card 3: Dispatch Action Zone -->
+<div class="p-5 rounded-xl bg-gradient-to-b from-surface-container to-surface-container-low shadow-xl">
+<div class="flex flex-col gap-3">
+<button class="w-full py-3.5 px-4 rounded font-headline font-bold text-xs tracking-wider uppercase text-on-primary bg-primary hover:bg-primary-container shadow-lg transition-all flex items-center justify-center gap-2" id="main-submit-btn" onclick="toggleModal('modal-submit-confirm')">
+<span class="material-symbols-outlined text-[18px]">send</span>
+            Submit Deliverables &amp; Dispatch to Student →
+          </button>
+<button class="w-full py-2.5 px-4 rounded bg-surface-container-high hover:bg-surface-container-highest text-on-surface text-xs font-label font-medium transition-colors flex items-center justify-center gap-2">
+<span class="material-symbols-outlined text-[16px]">save</span>
+            Save Full Review as Draft
+          </button>
+</div>
+<div class="mt-4 p-3 rounded bg-surface-container-lowest text-[10px] text-on-surface-variant leading-relaxed">
+<span class="font-bold text-on-surface">Submission Protocol Notice:</span>
+          Assignment status will transition to <em>"Submitted for Review"</em>. Student has 72 hours to accept or request scope-aligned adjustments.
+        </div>
+</div>
+<!-- Academic Helpdesk Mini Card -->
+<div class="p-4 rounded-xl bg-surface-container-low shadow-md flex items-center justify-between">
+<div class="flex items-center gap-2.5">
+<div class="w-7 h-7 rounded bg-surface-container flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined text-[16px]">contact_support</span>
+</div>
+<div>
+<div class="text-[11px] font-semibold text-on-surface">Faculty Escrow Helpdesk</div>
+<div class="text-[9px] text-on-surface-variant">Node sync query? Contact registrar</div>
+</div>
+</div>
+<button class="text-xs text-secondary font-label hover:underline">Help</button>
+</div>
+</div>
+</div>
+<!-- MODAL 1: Final Submission Confirmation Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md hidden p-4" id="modal-submit-confirm">
+<div class="w-full max-w-xl rounded-xl bg-surface-container shadow-2xl p-6 relative">
+<div class="flex items-start justify-between pb-4 mb-4">
+<div class="flex items-center gap-2.5">
+<div class="p-2 rounded bg-surface-container-highest text-primary">
+<span class="material-symbols-outlined text-[24px]">lock</span>
+</div>
+<div>
+<h3 class="text-base font-headline font-bold text-on-surface">Cryptographic Dispatch Confirmation</h3>
+<p class="text-xs text-on-surface-variant mt-0.5">FBX-104621 • Release Deliverables to Student</p>
+</div>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" onclick="toggleModal('modal-submit-confirm')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-4 text-xs font-body">
+<div class="p-3 rounded-lg bg-surface-container-low space-y-2">
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Target Scholar:</span>
+<span class="text-on-surface font-semibold">Alex Morgan (Oxford Visiting Fellow)</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Enclosed Deliverables:</span>
+<span class="text-secondary font-mono">4 Signed Artifacts (2.91 MB)</span>
+</div>
+<div class="flex justify-between items-center text-on-surface-variant">
+<span>Staged Escrow Balance:</span>
+<span class="text-tertiary font-mono font-bold">$85.00 USD Locked</span>
+</div>
+</div>
+<div class="p-3 rounded-lg bg-surface-container-high/30 text-[11px] text-on-surface-variant leading-relaxed">
+          The cryptographic hash for each file will be stamped to Node #8491 witness ledger. Alex Morgan will be notified via instantaneous platform push and secure dispatch email.
+        </div>
+<label class="flex items-start gap-2.5 p-3 rounded-lg bg-surface-container-low cursor-pointer">
+<input class="mt-0.5 rounded text-primary focus:ring-0 bg-surface-container-highest border-0" id="modal-confirm-checkbox" type="checkbox"/>
+<span class="text-xs text-on-surface leading-normal">
+            I confirm these deliverables represent completed, verified work adhering to academic originality standards and the Veritas Faculty Charter.
+          </span>
+</label>
+</div>
+<div class="flex items-center justify-end gap-3 mt-6 pt-4">
+<button class="px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-xs font-label text-on-surface transition-colors" onclick="toggleModal('modal-submit-confirm')">
+          Return to Review
+        </button>
+<button class="px-5 py-2.5 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-headline font-bold uppercase tracking-wider transition-all shadow-md" onclick="executeDispatch()">
+          Confirm &amp; Dispatch Deliverables
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL 2: Student View Preview Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-background/80 backdrop-blur-md hidden p-4" id="modal-student-preview">
+<div class="w-full max-w-2xl rounded-xl bg-surface-container shadow-2xl p-6 relative">
+<div class="flex items-start justify-between pb-4 mb-4">
+<div class="flex items-center gap-2.5">
+<div class="p-2 rounded bg-secondary-container/50 text-secondary">
+<span class="material-symbols-outlined text-[24px]">visibility</span>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h3 class="text-base font-headline font-bold text-on-surface">Student Portal Perspective Preview</h3>
+<span class="px-2 py-0.5 rounded text-[9px] font-mono bg-surface-container-high text-secondary">Alex Morgan View</span>
+</div>
+<p class="text-xs text-on-surface-variant mt-0.5">Simulated rendering of student deliverable receipt screen</p>
+</div>
+</div>
+<button class="p-1 rounded text-on-surface-variant hover:text-on-surface" onclick="toggleModal('modal-student-preview')">
+<span class="material-symbols-outlined text-[20px]">close</span>
+</button>
+</div>
+<div class="space-y-4 text-xs font-body">
+<!-- Student Header Card -->
+<div class="p-4 rounded-lg bg-surface-container-low">
+<div class="flex items-center justify-between mb-2">
+<span class="text-xs font-semibold text-on-surface">Feedback Ready for Download</span>
+<span class="text-[10px] font-mono text-tertiary">72h Auto-Acceptance Active</span>
+</div>
+<p class="text-xs text-on-surface-variant leading-relaxed">
+            Dr. Ananya Sharma has completed your review. Download your diagnostic feedback bundle below and inspect the marginalia remarks.
+          </p>
+</div>
+<!-- Instructor Message as Seen by Student -->
+<div class="p-4 rounded-lg bg-surface-container-high/40">
+<div class="flex items-center gap-2 mb-2">
+<div class="w-5 h-5 rounded-full bg-primary flex items-center justify-center text-[10px] font-bold text-on-primary">A</div>
+<span class="text-xs font-semibold text-on-surface">Dr. Ananya Sharma (Instructor Note)</span>
+</div>
+<p class="text-xs text-on-surface-variant italic pl-7 leading-relaxed">
+            "Hello Alex, I've completed the comprehensive review of your research report and attached the 4 diagnostic feedback files covering the agreed scope..."
+          </p>
+</div>
+<!-- Download Bundle CTA as Seen by Student -->
+<div class="p-3 rounded-lg bg-surface-container-low flex items-center justify-between">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-secondary text-[20px]">archive</span>
+<div>
+<div class="font-medium text-on-surface text-xs">Deliverables_Release_FBX-104621.zip</div>
+<div class="text-[10px] text-on-surface-variant font-mono">4 files • 2.91 MB • SHA-256 Verified</div>
+</div>
+</div>
+<button class="px-3 py-1.5 rounded bg-surface-container-high text-secondary text-xs font-label">Download Bundle</button>
+</div>
+<!-- Simulated Student Actions -->
+<div class="flex items-center gap-3 pt-2">
+<button class="flex-1 py-2 rounded bg-secondary-container text-on-secondary text-xs font-bold font-label">
+            Accept Deliverables &amp; Release Escrow ($85.00)
+          </button>
+<button class="px-4 py-2 rounded bg-surface-container-high text-on-surface text-xs font-label">
+            Request Scope Clarification
+          </button>
+</div>
+</div>
+<div class="flex justify-end mt-6 pt-4">
+<button class="px-4 py-2 rounded bg-surface-container-high hover:bg-surface-container-highest text-xs font-label text-on-surface" onclick="toggleModal('modal-student-preview')">
+          Close Preview
+        </button>
+</div>
+</div>
+</div>
+<!-- MODAL 3: Success State Overlay -->
+<div class="fixed inset-0 z-50 flex items-center justify-center bg-background/85 backdrop-blur-md hidden p-4" id="modal-success-state">
+<div class="w-full max-w-lg rounded-xl bg-surface-container shadow-2xl p-6 sm:p-8 relative text-center">
+<div class="w-16 h-16 rounded-full bg-secondary-container/40 text-secondary mx-auto flex items-center justify-center shadow-lg mb-4">
+<span class="material-symbols-outlined text-[36px]">verified</span>
+</div>
+<h3 class="text-lg font-headline font-bold text-on-surface">Deliverables Submitted &amp; Hashed</h3>
+<p class="text-xs text-on-surface-variant mt-1 max-w-sm mx-auto leading-relaxed">
+        Assignment status transitioned to <strong class="text-secondary">"Submitted for Review"</strong>. Cryptographic witness stamps successfully recorded.
+      </p>
+<div class="my-5 p-4 rounded-lg bg-surface-container-low text-left font-mono text-xs space-y-2">
+<div class="flex justify-between text-on-surface-variant">
+<span>Transaction Timestamp:</span>
+<span class="text-on-surface">14 Oct 2026, 11:58 AM UTC</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Block Witness:</span>
+<span class="text-secondary">#8491 (Oxford Node)</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span>Escrow Timer:</span>
+<span class="text-tertiary">71h 59m remaining</span>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row items-center justify-center gap-3">
+<button class="w-full sm:w-auto px-5 py-2.5 rounded bg-primary text-on-primary hover:bg-primary-container text-xs font-headline font-bold transition-all shadow-md" onclick="toggleModal('modal-success-state')">
+          Return to My Work Dashboard
+        </button>
+<button class="w-full sm:w-auto px-4 py-2.5 rounded bg-surface-container-high hover:bg-surface-container-highest text-xs font-label text-on-surface transition-colors" onclick="toggleModal('modal-success-state')">
+          View Live Assignment Dossier
+        </button>
+</div>
+</div>
+</div>
+<!-- Inline Micro-interactions -->
+<script>
+    function toggleModal(modalId) {
+      const modal = document.getElementById(modalId);
+      if (modal) {
+        modal.classList.toggle('hidden');
+      }
+    }
+
+    function toggleCharterCertification(checkbox) {
+      const badge = document.getElementById('qa-counter-badge');
+      if (checkbox.checked) {
+        badge.innerText = '8 / 8 Verified';
+        badge.classList.remove('text-tertiary');
+        badge.classList.add('text-secondary');
+      } else {
+        badge.innerText = '7 / 8 Verified';
+        badge.classList.remove('text-secondary');
+        badge.classList.add('text-tertiary');
+      }
+    }
+
+    function markItemVerified(button) {
+      button.innerText = 'Verified';
+      button.classList.remove('bg-primary', 'text-on-primary');
+      button.classList.add('bg-secondary-container', 'text-secondary');
+      button.disabled = true;
+    }
+
+    function updateCharCount(textarea) {
+      const counter = document.getElementById('message-char-count');
+      if (counter) {
+        counter.innerText = textarea.value.length + ' / 1,500 characters';
+      }
+    }
+
+    function executeDispatch() {
+      toggleModal('modal-submit-confirm');
+      setTimeout(() => {
+        toggleModal('modal-success-state');
+      }, 300);
+    }
+  </script>
+</div></main></div></body></html>

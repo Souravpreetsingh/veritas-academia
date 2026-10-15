@@ -1,0 +1,180 @@
+// Turnint / Veritas Academia — Phase 2 foundation schema.
+//
+// SQLite is used for local development. The schema is written to remain
+// PostgreSQL-portable: no SQLite-only behaviour is relied upon.
+// See docs/data-model.md for the SQLite -> PostgreSQL migration notes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ---------------------------------------------------------------------------
+// NOTE ON TYPES
+//
+// Prisma `enum` is not supported on SQLite. Role and status columns are modeled
+// as String and constrained with the application-level unions in
+// src/lib/domain.ts. On PostgreSQL these columns become native enums.
+//
+// Prisma `Decimal` is not supported on SQLite. Monetary amounts are stored as
+// integer minor units (e.g. paise) plus an ISO-4217 currency code.
+// ---------------------------------------------------------------------------
+
+model User {
+  id           String    @id @default(cuid())
+  email        String    @unique
+  passwordHash String
+  name         String
+  // STUDENT | INSTRUCTOR | ADMIN (see src/lib/domain.ts)
+  role         String    @default("STUDENT")
+  emailVerified DateTime?
+  image        String?
+
+  // Suspension is enforced server-side on every authenticated request.
+  suspended       Boolean   @default(false)
+  suspendedAt     DateTime?
+  suspendedReason String?
+
+  lastLoginAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  studentProfile         StudentProfile?
+  instructorProfile      InstructorProfile?
+  instructorApplications InstructorApplication[]
+  requestsAsStudent      ServiceRequest[]       @relation("StudentRequests")
+
+  @@index([role])
+  @@index([suspended])
+  @@map("users")
+}
+
+model StudentProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  bio         String?
+  institution String?
+  fieldOfStudy String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("student_profiles")
+}
+
+model InstructorProfile {
+  id     String @id @default(cuid())
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  headline String?
+  bio      String?
+  // JSON-encoded string arrays; upgraded to native JSONB arrays on PostgreSQL.
+  expertise       String?
+  qualifications String?
+
+  // Only isApproved && isActive instructors may be listed publicly.
+  isApproved Boolean @default(false)
+  isActive   Boolean @default(true)
+
+  approvedAt   DateTime?
+  approvedById String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  services InstructorService[]
+  requests ServiceRequest[]
+
+  @@index([isApproved, isActive])
+  @@map("instructor_profiles")
+}
+
+model InstructorApplication {
+  id     String @id @default(cuid())
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  fullName      String
+  email         String
+  phone         String?
+  bio           String
+  expertise       String?
+  qualifications String?
+  // JSON-encoded proposed service offerings (name, description, amountMinor, turnaroundHours).
+  proposedServices String?
+
+  termsAcceptedAt DateTime
+
+  // PENDING_REVIEW | APPROVED | REJECTED | SUSPENDED
+  status        String    @default("PENDING_REVIEW")
+  reviewedAt    DateTime?
+  reviewedById  String?
+  reviewNotes   String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([userId])
+  @@index([status])
+  @@map("instructor_applications")
+}
+
+model InstructorService {
+  id           String            @id @default(cuid())
+  instructorId String
+  instructor   InstructorProfile @relation(fields: [instructorId], references: [id], onDelete: Cascade)
+
+  code            String
+  name            String
+  description     String?
+  amountMinor     Int
+  currency        String          @default("INR")
+  turnaroundHours Int
+  isActive        Boolean         @default(true)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  requests ServiceRequest[]
+
+  @@unique([instructorId, code])
+  @@index([instructorId, isActive])
+  @@map("instructor_services")
+}
+
+// Phase 2 records the request core only. Status transitions, payments, analysis
+// jobs, reports and disputes arrive with their respective later phases.
+model ServiceRequest {
+  id        String           @id @default(cuid())
+  reference String           @unique
+  studentId String
+  student   User             @relation("StudentRequests", fields: [studentId], references: [id], onDelete: Cascade)
+  instructorId   String
+  instructor     InstructorProfile @relation(fields: [instructorId], references: [id], onDelete: Restrict)
+  serviceId      String
+  service        InstructorService @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+
+  title        String
+  instructions String?
+  deadlineAt   DateTime?
+
+  // DRAFT | Awaiting Payment | ... (see src/lib/domain.ts)
+  status       String @default("DRAFT")
+  amountMinor  Int
+  currency     String @default("INR")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([studentId])
+  @@index([instructorId])
+  @@index([status])
+  @@map("service_requests")
+}
