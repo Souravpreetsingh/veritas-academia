@@ -45,6 +45,7 @@ Open http://localhost:3000.
 | `npm run db:generate` | Regenerate the Prisma client |
 | `npm run db:studio` | Open Prisma Studio |
 | `npm run db:reset` | Drop and recreate the local database |
+| `npm test` | Run the automated test suite (uses a dedicated `prisma/test.db`) |
 | `npm run grant-admin -- --email=you@example.com --confirm` | Promote an existing user to ADMIN |
 
 ## Accounts, roles and access
@@ -85,14 +86,18 @@ never return fabricated results.
 
 ## Project status
 
-Phase 1 (audit) and Phase 2 (foundation) are complete:
+Phase 1 (audit), Phase 2 (foundation) and Phase 3A (data model) are complete:
 
-- Database schema + initial migration (`prisma/`)
+- Database schema + migrations (`prisma/`)
 - Authentication with server-enforced roles
 - Environment + secret handling
 - Private storage interface (local dev adapter)
 - Analysis-provider interface (explicitly unconfigured)
+- `Document`, `AnalysisJob`, `AnalysisResult` models (metadata only; no file
+  bytes in the database and no fabricated analysis results)
+- Automated test harness (`npm test`)
 
-Not yet implemented: instructor approval, request lifecycle, real document
-analysis, Razorpay payments, report delivery, payouts, administrator dashboard.
+Not yet implemented: document-upload endpoints, instructor approval, request
+lifecycle, real document analysis, Razorpay payments, report delivery, payouts,
+administrator dashboard.
 See `docs/data-model.md` for the SQLite → PostgreSQL migration notes.

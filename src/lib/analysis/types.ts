@@ -5,12 +5,9 @@
 // ever fabricated: when the provider is unconfigured, callers receive an
 // "unavailable" state and must surface that to the user.
 
-export type AnalysisJobStatus =
-  | "UNCONFIGURED"
-  | "PENDING"
-  | "PROCESSING"
-  | "COMPLETED"
-  | "FAILED";
+import type { AnalysisJobStatus } from "@/lib/domain";
+
+export type { AnalysisJobStatus };
 
 export interface AnalysisAvailability {
   configured: boolean;

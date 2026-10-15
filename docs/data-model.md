@@ -38,7 +38,30 @@ SQLite-only behaviour so production can move to PostgreSQL with minimal change.
 
 ## Deliberately deferred
 
-Payments, refunds, earnings, payouts, documents, analysis jobs/results, source
-matches, reports, notifications, messages, reviews, disputes and audit events
-will be added in the migration for the phase that implements them — never
-pre-seeded with fabricated data.
+Payments, refunds, earnings, payouts, notifications, messages, reviews,
+disputes and audit events will be added in the migration for the phase that
+implements them — never pre-seeded with fabricated data.
+
+## Phase 3A — documents and analysis boundary
+
+Added `Document`, `AnalysisJob`, and `AnalysisResult`.
+
+- **`Document`** stores *metadata only*: `storageDriver`, `storageKey`
+  (unique, server-generated), `originalName`, `contentType`, `sizeBytes`, an
+  optional `checksumSha256`, and a `status`. File bytes live in private storage
+  (`src/lib/storage`), never in the database. Ownership is `ownerId → User`
+  (`onDelete: Cascade`); an optional `requestId → ServiceRequest`
+  (`onDelete: SetNull`) detaches rather than destroys records.
+- **`AnalysisJob`** references a document (`Cascade`) and the requesting user.
+  `type` is `SIMILARITY` or `AI_WRITING`; `status` defaults to `UNCONFIGURED`;
+  `provider` defaults to `"unconfigured"`. Provider metadata is JSON-encoded.
+- **`AnalysisResult`** is one-per-job (`jobId @unique`). `similarityPercent`
+  and `aiLikelihood` are **nullable by design** — `null` means "not produced",
+  never a fabricated `0`. `matches` and `providerPayload` stay `null` until a
+  real, authorised provider runs.
+
+Provider state remains explicitly unconfigured; the platform cannot mark a job
+`COMPLETED` without an actual analysis (enforced by
+`canTransitionAnalysisStatus` in `src/lib/domain.ts`).
+
+Migrations are additive — no existing rows are modified or destroyed.

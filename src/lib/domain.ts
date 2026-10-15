@@ -50,6 +50,63 @@ export function isRequestStatus(value: unknown): value is RequestStatus {
   );
 }
 
+/** Pure authorization decision: is `role` a member of `allowed`? */
+export function isRoleAllowed(role: Role, allowed: readonly Role[]): boolean {
+  return allowed.includes(role);
+}
+
+export const DOCUMENT_STATUSES = ["AVAILABLE", "QUARANTINED", "DELETED"] as const;
+export type DocumentStatus = (typeof DOCUMENT_STATUSES)[number];
+
+export function isDocumentStatus(value: unknown): value is DocumentStatus {
+  return (
+    typeof value === "string" && (DOCUMENT_STATUSES as readonly string[]).includes(value)
+  );
+}
+
+export const ANALYSIS_JOB_TYPES = ["SIMILARITY", "AI_WRITING"] as const;
+export type AnalysisJobType = (typeof ANALYSIS_JOB_TYPES)[number];
+
+export function isAnalysisJobType(value: unknown): value is AnalysisJobType {
+  return (
+    typeof value === "string" && (ANALYSIS_JOB_TYPES as readonly string[]).includes(value)
+  );
+}
+
+export const ANALYSIS_JOB_STATUSES = [
+  "UNCONFIGURED",
+  "PENDING",
+  "PROCESSING",
+  "COMPLETED",
+  "FAILED",
+] as const;
+export type AnalysisJobStatus = (typeof ANALYSIS_JOB_STATUSES)[number];
+
+export function isAnalysisJobStatus(value: unknown): value is AnalysisJobStatus {
+  return (
+    typeof value === "string" &&
+    (ANALYSIS_JOB_STATUSES as readonly string[]).includes(value)
+  );
+}
+
+// Permitted analysis-job status transitions. A job can only reach COMPLETED
+// from PROCESSING, and COMPLETED is terminal — this prevents invalid states
+// such as a job that never ran being marked complete.
+const ANALYSIS_STATUS_TRANSITIONS: Record<AnalysisJobStatus, readonly AnalysisJobStatus[]> = {
+  UNCONFIGURED: ["PENDING", "FAILED"],
+  PENDING: ["PROCESSING", "FAILED", "UNCONFIGURED"],
+  PROCESSING: ["COMPLETED", "FAILED"],
+  COMPLETED: [],
+  FAILED: ["PENDING"],
+};
+
+export function canTransitionAnalysisStatus(
+  from: AnalysisJobStatus,
+  to: AnalysisJobStatus,
+): boolean {
+  return (ANALYSIS_STATUS_TRANSITIONS[from] ?? []).includes(to);
+}
+
 /** The portal a role is allowed to reach by default. */
 export function homePathForRole(role: Role): string {
   switch (role) {

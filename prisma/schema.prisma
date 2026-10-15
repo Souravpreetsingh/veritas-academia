@@ -47,6 +47,8 @@ model User {
   instructorProfile      InstructorProfile?
   instructorApplications InstructorApplication[]
   requestsAsStudent      ServiceRequest[]       @relation("StudentRequests")
+  documents              Document[]
+  analysisJobsRequested  AnalysisJob[]          @relation("RequestedAnalysisJobs")
 
   @@index([role])
   @@index([suspended])
@@ -161,6 +163,8 @@ model ServiceRequest {
   serviceId      String
   service        InstructorService @relation(fields: [serviceId], references: [id], onDelete: Restrict)
 
+  documents Document[]
+
   title        String
   instructions String?
   deadlineAt   DateTime?
@@ -177,4 +181,101 @@ model ServiceRequest {
   @@index([instructorId])
   @@index([status])
   @@map("service_requests")
+}
+
+// ---------------------------------------------------------------------------
+// Phase 3A — private documents and analysis-provider boundary
+// ---------------------------------------------------------------------------
+
+// Document METADATA only. File contents live in private storage (see
+// src/lib/storage); this table stores a storage reference and metadata so the
+// database is never used to hold uploaded file bytes.
+model Document {
+  id      String  @id @default(cuid())
+  ownerId String
+  owner   User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  // A document may belong to a request; deleting the request keeps the record
+  // but detaches it rather than destroying evidence.
+  requestId String?
+  request   ServiceRequest? @relation(fields: [requestId], references: [id], onDelete: SetNull)
+
+  storageDriver  String  @default("local")
+  storageKey     String  @unique
+  originalName   String
+  contentType    String
+  sizeBytes      Int
+  checksumSha256 String?
+
+  // AVAILABLE | QUARANTINED | DELETED (see src/lib/domain.ts)
+  status String @default("AVAILABLE")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  analysisJobs AnalysisJob[]
+
+  @@index([ownerId])
+  @@index([requestId])
+  @@index([status])
+  @@map("documents")
+}
+
+// A unit of analysis work against a document. Until a real, authorised provider
+// is connected, jobs remain UNCONFIGURED and are never marked COMPLETED.
+model AnalysisJob {
+  id            String   @id @default(cuid())
+  documentId    String
+  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  requestedById String
+  requestedBy   User     @relation("RequestedAnalysisJobs", fields: [requestedById], references: [id], onDelete: Cascade)
+
+  // SIMILARITY | AI_WRITING
+  type   String
+  // UNCONFIGURED | PENDING | PROCESSING | COMPLETED | FAILED
+  status String @default("UNCONFIGURED")
+
+  // Provider integration boundary. Defaults to "unconfigured".
+  provider      String  @default("unconfigured")
+  providerJobId String?
+  // JSON-encoded provider metadata. Never store raw document text here.
+  providerMeta  String?
+
+  errorMessage String?
+  attempts     Int      @default(0)
+
+  startedAt   DateTime?
+  completedAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  result AnalysisResult?
+
+  @@index([documentId])
+  @@index([status])
+  @@index([type])
+  @@map("analysis_jobs")
+}
+
+// Results are written ONLY by a real analysis provider. Score fields are
+// nullable by design: null means "not produced" — never a fabricated zero.
+model AnalysisResult {
+  id    String      @id @default(cuid())
+  jobId String      @unique
+  job   AnalysisJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  // UNCONFIGURED | PENDING | PROCESSING | COMPLETED | FAILED
+  status String
+
+  similarityPercent Float?
+  aiLikelihood      Float?
+
+  // JSON-encoded matched sources / segments. Null until a real provider runs.
+  matches         String?
+  providerPayload String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@map("analysis_results")
 }

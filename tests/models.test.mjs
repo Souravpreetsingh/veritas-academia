@@ -1,0 +1,123 @@
+import test from "node:test";
+import assert from "node:assert/strict";
+import { Prisma, PrismaClient } from "@prisma/client";
+
+// Runs against the dedicated test database prepared by scripts/run-tests.mjs
+// (DATABASE_URL=file:./test.db). Never points at the development database.
+const prisma = new PrismaClient();
+
+function isKnownError(err, code) {
+  return err instanceof Prisma.PrismaClientKnownRequestError && err.code === code;
+}
+
+async function reset() {
+  await prisma.analysisResult.deleteMany();
+  await prisma.analysisJob.deleteMany();
+  await prisma.document.deleteMany();
+  await prisma.serviceRequest.deleteMany();
+  await prisma.instructorService.deleteMany();
+  await prisma.instructorProfile.deleteMany();
+  await prisma.studentProfile.deleteMany();
+  await prisma.user.deleteMany();
+}
+
+async function createUser(email = "owner@test.local") {
+  return prisma.user.create({ data: { name: "Test User", email, passwordHash: "hash" } });
+}
+
+const baseDocument = (ownerId) => ({
+  ownerId,
+  storageKey: `key-${Math.random().toString(36).slice(2)}`,
+  originalName: "draft.pdf",
+  contentType: "application/pdf",
+  sizeBytes: 1234,
+});
+
+test.after(async () => {
+  await prisma.$disconnect();
+});
+
+test("Document requires an existing owner (foreign key enforced)", async () => {
+  await reset();
+  await assert.rejects(
+    () => prisma.document.create({ data: { ...baseDocument("missing-user"), storageKey: "orphan" } }),
+    (err) => isKnownError(err, "P2003"),
+  );
+});
+
+test("storageKey is unique across documents", async () => {
+  await reset();
+  const user = await createUser();
+  await prisma.document.create({ data: { ...baseDocument(user.id), storageKey: "duplicate-key" } });
+  await assert.rejects(
+    () => prisma.document.create({ data: { ...baseDocument(user.id), storageKey: "duplicate-key" } }),
+    (err) => isKnownError(err, "P2002"),
+  );
+});
+
+test("deleting a user cascades to their documents", async () => {
+  await reset();
+  const user = await createUser();
+  await prisma.document.create({ data: baseDocument(user.id) });
+  assert.equal(await prisma.document.count(), 1);
+  await prisma.user.delete({ where: { id: user.id } });
+  assert.equal(await prisma.document.count(), 0);
+});
+
+test("deleting a document cascades to analysis jobs and results", async () => {
+  await reset();
+  const user = await createUser();
+  const doc = await prisma.document.create({ data: baseDocument(user.id) });
+  const job = await prisma.analysisJob.create({
+    data: { documentId: doc.id, requestedById: user.id, type: "SIMILARITY" },
+  });
+  await prisma.analysisResult.create({ data: { jobId: job.id, status: "UNCONFIGURED" } });
+
+  await prisma.document.delete({ where: { id: doc.id } });
+  assert.equal(await prisma.analysisJob.count(), 0);
+  assert.equal(await prisma.analysisResult.count(), 0);
+});
+
+test("AnalysisResult is unique per job", async () => {
+  await reset();
+  const user = await createUser();
+  const doc = await prisma.document.create({ data: baseDocument(user.id) });
+  const job = await prisma.analysisJob.create({
+    data: { documentId: doc.id, requestedById: user.id, type: "AI_WRITING" },
+  });
+  await prisma.analysisResult.create({ data: { jobId: job.id, status: "UNCONFIGURED" } });
+  await assert.rejects(
+    () => prisma.analysisResult.create({ data: { jobId: job.id, status: "COMPLETED" } }),
+    (err) => isKnownError(err, "P2002"),
+  );
+});
+
+test("analysis defaults to unconfigured and scores stay null (no fabricated data)", async () => {
+  await reset();
+  const user = await createUser();
+  const doc = await prisma.document.create({ data: baseDocument(user.id) });
+  const job = await prisma.analysisJob.create({
+    data: { documentId: doc.id, requestedById: user.id, type: "SIMILARITY" },
+  });
+
+  assert.equal(job.provider, "unconfigured");
+  assert.equal(job.status, "UNCONFIGURED");
+  assert.equal(job.providerJobId, null);
+  assert.equal(job.startedAt, null);
+  assert.equal(job.completedAt, null);
+
+  const result = await prisma.analysisResult.create({
+    data: { jobId: job.id, status: "UNCONFIGURED" },
+  });
+  assert.equal(result.similarityPercent, null);
+  assert.equal(result.aiLikelihood, null);
+  assert.equal(result.matches, null);
+  assert.equal(result.providerPayload, null);
+});
+
+test("document status defaults to AVAILABLE", async () => {
+  await reset();
+  const user = await createUser();
+  const doc = await prisma.document.create({ data: baseDocument(user.id) });
+  assert.equal(doc.status, "AVAILABLE");
+});
