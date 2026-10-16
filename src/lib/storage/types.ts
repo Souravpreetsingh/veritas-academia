@@ -25,6 +25,8 @@ export interface StorageAdapter {
   put(input: PutObjectInput): Promise<StoredObject>;
   /** Read an object by key. Throws StorageError when missing or invalid. */
   get(key: string): Promise<Buffer>;
+  /** Stream an object by key without buffering the whole file in memory. */
+  getStream(key: string): Promise<ReadableStream<Uint8Array>>;
   exists(key: string): Promise<boolean>;
   remove(key: string): Promise<void>;
 }

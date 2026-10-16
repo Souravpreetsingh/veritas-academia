@@ -49,6 +49,7 @@ model User {
   requestsAsStudent      ServiceRequest[]       @relation("StudentRequests")
   documents              Document[]
   analysisJobsRequested  AnalysisJob[]          @relation("RequestedAnalysisJobs")
+  auditEvents            AuditEvent[]
 
   @@index([role])
   @@index([suspended])
@@ -278,4 +279,34 @@ model AnalysisResult {
   updatedAt DateTime @updatedAt
 
   @@map("analysis_results")
+}
+
+// ---------------------------------------------------------------------------
+// Phase 3B — security audit trail and quarantine
+// ---------------------------------------------------------------------------
+
+// Append-only record of security-relevant events (sensitive document access,
+// denials, uploads). Never stores document contents, passwords, or tokens.
+// `actorId` is nullable with SetNull so the trail survives user deletion.
+model AuditEvent {
+  id      String @id @default(cuid())
+  actorId String?
+  actor   User?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+
+  // e.g. "document.upload", "document.download", "document.download.denied"
+  action     String
+  targetType String?
+  targetId   String?
+  // JSON-encoded, non-sensitive context only.
+  metadata   String?
+
+  ipAddress String?
+  userAgent String?
+  createdAt DateTime @default(now())
+
+  @@index([actorId])
+  @@index([action])
+  @@index([targetType, targetId])
+  @@index([createdAt])
+  @@map("audit_events")
 }

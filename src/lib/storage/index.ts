@@ -7,6 +7,11 @@ export * from "./types";
 
 let cached: StorageAdapter | null = null;
 
+/** The name of the configured storage driver (persisted on Document records). */
+export function currentStorageDriver(): string {
+  return readEnv("STORAGE_DRIVER") ?? "local";
+}
+
 /**
  * Resolve the configured storage adapter. Only the local development adapter is
  * implemented; an S3-compatible driver will be added behind this same factory.

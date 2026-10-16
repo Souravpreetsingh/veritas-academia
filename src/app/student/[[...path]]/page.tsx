@@ -1,5 +1,6 @@
 import Placeholder from "@/components/Placeholder";
 import ScreenRenderer from "@/components/ScreenRenderer";
+import DocumentUploadEnhancer from "@/components/DocumentUploadEnhancer";
 import { SCREENS, byRoute } from "@/screens/manifest";
 
 const PREFIX = "/student";
@@ -24,7 +25,14 @@ export default async function StudentPage({
   const route = PREFIX + (path.length ? "/" + path.join("/") : "");
 
   const screen = byRoute(route);
-  if (screen) return <ScreenRenderer screen={screen} />;
+  if (screen) {
+    return (
+      <>
+        <ScreenRenderer screen={screen} />
+        {screen.id === "student-document-upload" ? <DocumentUploadEnhancer /> : null}
+      </>
+    );
+  }
 
   return <Placeholder persona="student" route={route} />;
 }

@@ -23,4 +23,4 @@ console.log("• Preparing dedicated test database (prisma/test.db)");
 run("npx prisma db push --skip-generate --force-reset --accept-data-loss");
 
 console.log("• Running node:test suites");
-run('node --test "tests/**/*.test.mjs"');
+run('node --import ./scripts/ts-resolve-hook.mjs --test "tests/**/*.test.mjs"');

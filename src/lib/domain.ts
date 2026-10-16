@@ -55,6 +55,17 @@ export function isRoleAllowed(role: Role, allowed: readonly Role[]): boolean {
   return allowed.includes(role);
 }
 
+// Security audit action identifiers. Stored in AuditEvent.action.
+export const AUDIT_ACTIONS = {
+  DOCUMENT_UPLOAD: "document.upload",
+  DOCUMENT_UPLOAD_DENIED: "document.upload.denied",
+  DOCUMENT_UPLOAD_FAILED: "document.upload.failed",
+  DOCUMENT_DOWNLOAD: "document.download",
+  DOCUMENT_DOWNLOAD_DENIED: "document.download.denied",
+  DOCUMENT_DOWNLOAD_BLOCKED_QUARANTINE: "document.download.blocked_quarantine",
+} as const;
+export type AuditAction = (typeof AUDIT_ACTIONS)[keyof typeof AUDIT_ACTIONS];
+
 export const DOCUMENT_STATUSES = ["AVAILABLE", "QUARANTINED", "DELETED"] as const;
 export type DocumentStatus = (typeof DOCUMENT_STATUSES)[number];
 

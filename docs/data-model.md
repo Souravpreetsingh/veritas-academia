@@ -38,9 +38,9 @@ SQLite-only behaviour so production can move to PostgreSQL with minimal change.
 
 ## Deliberately deferred
 
-Payments, refunds, earnings, payouts, notifications, messages, reviews,
-disputes and audit events will be added in the migration for the phase that
-implements them — never pre-seeded with fabricated data.
+Payments, refunds, earnings, payouts, notifications, messages, reviews and
+disputes will be added in the migration for the phase that implements them —
+never pre-seeded with fabricated data.
 
 ## Phase 3A — documents and analysis boundary
 
@@ -65,3 +65,28 @@ Provider state remains explicitly unconfigured; the platform cannot mark a job
 `canTransitionAnalysisStatus` in `src/lib/domain.ts`).
 
 Migrations are additive — no existing rows are modified or destroyed.
+
+## Phase 3B — secure document handling
+
+Added `AuditEvent` and the upload/download machinery around the existing
+`Document` model. See `docs/security.md` for the full control list.
+
+- **`AuditEvent`** records security-relevant actions (`document.upload`,
+  `document.download`, and their denied/blocked/failed variants). `actorId →
+  User` uses `onDelete: SetNull` so history survives account deletion; the
+  actor id is nulled, never the event. `metadata` is a JSON-encoded `String`
+  holding **non-sensitive** context only (content type, size, reason) — never
+  document bytes, credentials or tokens. Indexed by actor, action, target and
+  timestamp.
+- **Document status** flows `QUARANTINED → AVAILABLE` only via a CLEAN malware
+  scan. With the scanner unconfigured, uploads are stored but remain
+  `QUARANTINED` and are **never** downloadable (`isDocumentDownloadable`).
+- **Uploads** (`POST /api/documents`) validate size (≤ 25 MB), extension,
+  declared MIME type and magic-byte signature before persisting metadata; a
+  database failure rolls back the stored object. **Downloads**
+  (`GET /api/documents/[id]/download`) enforce ownership, block quarantined
+  files, stream from private storage and set an attachment disposition with
+  `X-Content-Type-Options: nosniff`.
+
+Storage bytes never enter the database, and no public URL is ever issued for a
+document.

@@ -11,6 +11,7 @@ function isKnownError(err, code) {
 }
 
 async function reset() {
+  await prisma.auditEvent.deleteMany();
   await prisma.analysisResult.deleteMany();
   await prisma.analysisJob.deleteMany();
   await prisma.document.deleteMany();
@@ -121,3 +122,36 @@ test("document status defaults to AVAILABLE", async () => {
   const doc = await prisma.document.create({ data: baseDocument(user.id) });
   assert.equal(doc.status, "AVAILABLE");
 });
+
+test("audit events persist with non-sensitive metadata", async () => {
+  await reset();
+  const user = await createUser();
+  const event = await prisma.auditEvent.create({
+    data: {
+      actorId: user.id,
+      action: "document.upload",
+      targetType: "Document",
+      targetId: "doc-1",
+      metadata: JSON.stringify({ contentType: "application/pdf", sizeBytes: 1234 }),
+      ipAddress: "127.0.0.1",
+      userAgent: "test-agent",
+    },
+  });
+  assert.equal(event.action, "document.upload");
+  assert.deepEqual(JSON.parse(event.metadata), { contentType: "application/pdf", sizeBytes: 1234 });
+
+  const stored = await prisma.auditEvent.findUnique({ where: { id: event.id } });
+  assert.equal(stored.ipAddress, "127.0.0.1");
+});
+
+test("deleting a user preserves audit events but nulls the actor (SetNull)", async () => {
+  await reset();
+  const user = await createUser();
+  await prisma.auditEvent.create({ data: { actorId: user.id, action: "document.download" } });
+  await prisma.user.delete({ where: { id: user.id } });
+
+  const events = await prisma.auditEvent.findMany();
+  assert.equal(events.length, 1);
+  assert.equal(events[0].actorId, null);
+});
+

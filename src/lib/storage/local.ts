@@ -1,5 +1,7 @@
 import { randomUUID } from "node:crypto";
+import { createReadStream } from "node:fs";
 import { mkdir, readFile, stat, unlink, writeFile } from "node:fs/promises";
+import { Readable } from "node:stream";
 import path from "node:path";
 import {
   ALLOWED_CONTENT_TYPES,
@@ -66,6 +68,17 @@ export function createLocalStorage({ root }: LocalStorageOptions): StorageAdapte
       } catch {
         throw new StorageError("Object not found.");
       }
+    },
+
+    async getStream(key: string): Promise<ReadableStream<Uint8Array>> {
+      const target = resolveKey(key);
+      try {
+        await stat(target);
+      } catch {
+        throw new StorageError("Object not found.");
+      }
+      // Streams from disk rather than buffering the whole file in memory.
+      return Readable.toWeb(createReadStream(target)) as ReadableStream<Uint8Array>;
     },
 
     async exists(key: string): Promise<boolean> {
