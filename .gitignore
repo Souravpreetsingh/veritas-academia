@@ -43,6 +43,9 @@ yarn-error.log*
 # private uploaded documents — must never be committed
 /private-storage/
 
+# local credential drop folders — must never be committed
+/api key/
+
 # vercel
 .vercel
 

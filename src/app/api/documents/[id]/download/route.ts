@@ -54,14 +54,15 @@ export async function GET(
     return jsonError("Document not found.", 404);
   }
 
-  // Quarantined / deleted documents are never served.
-  if (!isDocumentDownloadable(document.status)) {
+  // Quarantined / deleted / unscanned documents are never served. Both the
+  // document status and the persisted scan state must authorize release.
+  if (!isDocumentDownloadable(document)) {
     await recordAuditEvent({
       actorId: user.id,
       action: AUDIT_ACTIONS.DOCUMENT_DOWNLOAD_BLOCKED_QUARANTINE,
       targetType: "Document",
       targetId: document.id,
-      metadata: { status: document.status },
+      metadata: { status: document.status, scanStatus: document.scanStatus },
       request,
     });
     return jsonError("This document is not available for download.", 423);

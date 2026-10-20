@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import AppLauncher from "@/components/AppLauncher";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -29,7 +28,6 @@ export default function RootLayout({
       </head>
       <body className="bg-background font-body text-on-surface antialiased min-h-screen">
         {children}
-        <AppLauncher />
       </body>
     </html>
   );

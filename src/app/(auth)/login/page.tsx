@@ -1,6 +1,7 @@
 import { redirect } from "next/navigation";
 import { getSessionUser } from "@/lib/session";
 import { homePathForRole } from "@/lib/domain";
+import { isSafeRelativePath } from "@/lib/login-routing";
 import LoginForm from "./login-form";
 
 export const metadata = { title: "Sign in — Veritas Academia" };
@@ -14,10 +15,9 @@ export default async function LoginPage({
   const user = await getSessionUser();
   if (user) redirect(homePathForRole(user.role));
 
-  // Only allow same-origin relative paths to prevent open redirects.
-  const next = params.next && params.next.startsWith("/") && !params.next.startsWith("//")
-    ? params.next
-    : undefined;
+  // Only allow same-origin relative paths to prevent open redirects. Role
+  // confinement happens after sign-in via resolvePostLoginPath.
+  const next = isSafeRelativePath(params.next) ? params.next : undefined;
 
   return (
     <div className="min-h-screen flex items-center justify-center px-6">

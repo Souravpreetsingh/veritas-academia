@@ -49,8 +49,10 @@ export function createLocalStorage({ root }: LocalStorageOptions): StorageAdapte
       const key = `${prefix}/${randomUUID()}.${ext}`;
       const target = resolveKey(key);
 
-      await mkdir(path.dirname(target), { recursive: true });
-      await writeFile(target, data);
+      // Owner-only permissions where the platform supports them (POSIX). On
+      // Windows the mode is ignored, which is fine for local development.
+      await mkdir(path.dirname(target), { recursive: true, mode: 0o700 });
+      await writeFile(target, data, { mode: 0o600 });
 
       return {
         key,

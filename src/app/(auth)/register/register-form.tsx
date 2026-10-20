@@ -121,8 +121,15 @@ export default function RegisterForm() {
 
       <p className="text-center text-sm text-on-surface-variant">
         Already have an account?{" "}
-        <Link href="/login" className="text-secondary hover:underline">
-          Sign in
+        <Link href="/student/login" className="text-secondary hover:underline">
+          Student sign in
+        </Link>
+      </p>
+
+      <p className="text-center text-xs text-on-surface-variant">
+        Applying to teach?{" "}
+        <Link href="/instructor/register" className="text-secondary hover:underline">
+          Submit an instructor application
         </Link>
       </p>
     </form>

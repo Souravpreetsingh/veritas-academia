@@ -1,3 +1,0 @@
-// AUTO-GENERATED from screens-src — do not edit by hand.
-const code: string = "\n    document.addEventListener('DOMContentLoaded', () => {\n      const filterButtons = document.querySelectorAll('#disciplineFilter button');\n      filterButtons.forEach(btn => {\n        btn.addEventListener('click', () => {\n          filterButtons.forEach(b => {\n            b.className = 'px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-surface-container-high hover:bg-surface-variant text-on-surface-variant hover:text-on-surface transition-all';\n          });\n          btn.className = 'px-3.5 py-1.5 rounded font-label text-xs tracking-wide bg-primary text-on-primary font-semibold shadow-md transition-all';\n        });\n      });\n    });\n  \n;\n";
-export default code;

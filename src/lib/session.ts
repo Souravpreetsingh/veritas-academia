@@ -46,10 +46,16 @@ export async function getSessionUser(): Promise<SessionUser | null> {
   };
 }
 
-/** For layouts: redirect to login (carrying `next`) when unauthenticated. */
-export async function requireUserForPage(nextPath: string): Promise<SessionUser> {
+/**
+ * For layouts: redirect to the relevant portal login (carrying `next`) when
+ * unauthenticated. `loginPath` defaults to the generic sign-in screen.
+ */
+export async function requireUserForPage(
+  nextPath: string,
+  loginPath = "/login",
+): Promise<SessionUser> {
   const user = await getSessionUser();
-  if (!user) redirect(`/login?next=${encodeURIComponent(nextPath)}`);
+  if (!user) redirect(`${loginPath}?next=${encodeURIComponent(nextPath)}`);
   return user;
 }
 
@@ -61,8 +67,9 @@ export async function requireUserForPage(nextPath: string): Promise<SessionUser>
 export async function requireRoleForPage(
   allowed: Role[],
   nextPath: string,
+  loginPath = "/login",
 ): Promise<SessionUser> {
-  const user = await requireUserForPage(nextPath);
+  const user = await requireUserForPage(nextPath, loginPath);
   if (!allowed.includes(user.role)) {
     redirect(homePathForRole(user.role));
   }

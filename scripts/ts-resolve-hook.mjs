@@ -38,6 +38,8 @@ registerHooks({
     if (specifier.startsWith(".") || specifier.startsWith("/")) {
       return resolveWithExtensions(specifier, context, nextResolve);
     }
-    return nextResolve(specifier, context);
+    // Bare specifiers (e.g. "next/server") resolve first as-is; the extension
+    // fallback then lets Node find "next/server.js" the way bundlers do.
+    return resolveWithExtensions(specifier, context, nextResolve);
   },
 });

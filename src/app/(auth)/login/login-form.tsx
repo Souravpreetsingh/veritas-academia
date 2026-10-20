@@ -4,6 +4,8 @@ import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { resolvePostLoginPath } from "@/lib/login-routing";
+import { isRole } from "@/lib/domain";
 
 export default function LoginForm({ next }: { next?: string }) {
   const router = useRouter();
@@ -25,17 +27,32 @@ export default function LoginForm({ next }: { next?: string }) {
 
     setLoading(false);
 
+    // Rate limiting: the credentials callback answers 429 with Retry-After when
+    // the attempt budget for this source/account is exhausted, and 503 when the
+    // limiter store is unavailable (fail closed). Both carry a NextAuth-shaped
+    // body, so they are detected by status.
+    if (result?.status === 429) {
+      setError("Too many sign-in attempts. Please wait a moment and try again.");
+      return;
+    }
+    if (result?.status === 503) {
+      setError("Sign-in is temporarily unavailable. Please try again shortly.");
+      return;
+    }
+
     if (result?.error) {
       setError("Invalid email or password.");
       return;
     }
 
-    // Determine the destination from the fresh session (role-based).
+    // Resolve the destination from the fresh, server-verified session only.
+    // `next` can never widen the role's access, and malformed `next` values are
+    // ignored in favour of the role's dashboard.
     try {
       const res = await fetch("/api/auth/session");
       const session = await res.json();
-      const role = session?.user?.role as string | undefined;
-      const target = next ?? (role === "INSTRUCTOR" ? "/instructor" : "/student");
+      const role = session?.user?.role;
+      const target = isRole(role) ? resolvePostLoginPath(role, next) : "/student";
       router.push(target);
       router.refresh();
     } catch {
@@ -96,7 +113,17 @@ export default function LoginForm({ next }: { next?: string }) {
       <p className="text-center text-sm text-on-surface-variant">
         Don&apos;t have an account?{" "}
         <Link href="/register" className="text-secondary hover:underline">
-          Create one
+          Create a student account
+        </Link>
+      </p>
+
+      <p className="text-center text-xs text-on-surface-variant">
+        <Link href="/student/login" className="text-secondary hover:underline">
+          Student sign in
+        </Link>
+        <span className="mx-2 text-outline-variant">•</span>
+        <Link href="/instructor/login" className="text-secondary hover:underline">
+          Instructor sign in
         </Link>
       </p>
     </form>

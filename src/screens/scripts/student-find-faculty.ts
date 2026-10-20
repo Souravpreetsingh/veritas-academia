@@ -1,3 +1,0 @@
-// AUTO-GENERATED from screens-src — do not edit by hand.
-const code: string = "\n      (function() {\n        // Highlight 'Find Faculty & Instructors' link in the persistent sidebar\n        const navLinks = document.querySelectorAll('aside nav a');\n        navLinks.forEach(link => {\n          if (link.getAttribute('data-path') === 'find-faculty') {\n            link.className = 'flex items-center gap-3 px-3 py-2 text-xs bg-surface-variant text-primary border-l-2 border-primary font-medium rounded-r shadow-[inset_0_0_12px_rgba(255,45,120,0.15)] transition-all duration-150';\n          }\n        });\n      })();\n    \n;\n";
-export default code;

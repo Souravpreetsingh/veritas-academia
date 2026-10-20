@@ -1,0 +1,65 @@
+# Demo-only Render Blueprint for Veritas Academia.
+#
+# This is NOT the production topology documented in docs/deployment-render.md.
+# It intentionally trades production durability for a quick preview:
+#   - SQLite and local document storage live on one persistent disk.
+#   - A disk limits the service to one instance and briefly interrupts traffic
+#     on each deploy (Render disables zero-downtime deploys for disk services).
+#   - Uploads remain QUARANTINED because no clamd service is configured.
+#   - The analysis worker is not scheduled, so analysis jobs do not run.
+#   - Payments/LLM providers stay disabled unless their env vars are added.
+#
+# Production still requires Postgres, an S3-compatible storage adapter, clamd,
+# a scheduled worker, trusted-proxy verification, and the CSP browser pass.
+# See docs/deployment-render.md, especially sections 6, 7, and 13.
+services:
+  - type: web
+    name: veritas-academia
+    runtime: node
+    plan: 0.5c-512mb
+    region: oregon
+    autoDeployTrigger: commit
+    # Build runs on separate compute and cannot see the persistent disk. The
+    # build-only DATABASE_URL keeps Prisma generation/build away from the
+    # runtime database path while /var/data is unmounted.
+    buildCommand: bash -c 'export DATABASE_URL="file:/tmp/build.db"; npm ci --include=dev && npx prisma generate && npm run build'
+    # Migrations MUST run here: Render's preDeployCommand runs on separate
+    # compute without the disk, so it cannot migrate the SQLite file.
+    startCommand: bash -c 'export NEXTAUTH_URL="${NEXTAUTH_URL:-$RENDER_EXTERNAL_URL}"; export NEXT_PUBLIC_APP_URL="${NEXT_PUBLIC_APP_URL:-$RENDER_EXTERNAL_URL}"; npx prisma migrate deploy && npm start'
+    healthCheckPath: /api/health
+    disk:
+      name: veritas-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: DATABASE_URL
+        value: "file:/var/data/prod.db"
+      - key: STORAGE_DRIVER
+        value: local
+      - key: STORAGE_LOCAL_ROOT
+        value: /var/data/storage
+      - key: MALWARE_SCANNER
+        value: unconfigured
+      # Keep false until Render's forwarded-header behavior is verified against
+      # docs/deployment-render.md section 8. While false, credential rate limits
+      # share one coarse server-wide bucket (still bounded).
+      - key: TRUST_PROXY_HEADERS
+        value: "false"
+      - key: AUTH_SECRET
+        generateValue: true
+      - key: RATE_LIMIT_HASH_SECRET
+        generateValue: true
+      # Self-references resolve to the live https://*.onrender.com URL. The
+      # start command also exports these as a fallback on first boot.
+      - key: NEXTAUTH_URL
+        fromService:
+          name: veritas-academia
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL
+      - key: NEXT_PUBLIC_APP_URL
+        fromService:
+          name: veritas-academia
+          type: web
+          envVarKey: RENDER_EXTERNAL_URL

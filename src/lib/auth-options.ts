@@ -5,6 +5,12 @@ import { verifyPassword, normalizeEmail } from "@/lib/password";
 import { isRole } from "@/lib/domain";
 import { readEnv } from "@/lib/env";
 
+// A pre-computed bcrypt hash of a random value. When the account does not exist
+// we still run a comparison against this hash, so sign-in latency does not leak
+// whether an email address is registered (timing-based user enumeration).
+const DUMMY_PASSWORD_HASH =
+  "$2b$12$Yhgb52s8/ZnsFZg49RZWSeYff3yM/HsZxsNuGycbogEUiSLoXiaSq";
+
 // Session invalidation / suspension strategy (documented for the team):
 // - Sessions are JWTs (encrypted JWE cookies) with a 7-day maxAge.
 // - The JWT carries id + role for fast UI decisions ONLY.
@@ -40,10 +46,16 @@ export const authOptions: NextAuthOptions = {
           where: { email: email.normalized },
         });
 
-        // Reject suspended accounts outright, even with a valid password.
-        if (!user || user.suspended) return null;
+        // Always perform a bcrypt comparison — against a dummy hash when the
+        // account is missing — so response timing does not reveal whether the
+        // email exists. All failure paths return the same generic null.
+        const valid = await verifyPassword(
+          credentials.password,
+          user?.passwordHash ?? DUMMY_PASSWORD_HASH,
+        );
 
-        const valid = await verifyPassword(credentials.password, user.passwordHash);
+        // Reject unknown or suspended accounts outright, even with a valid password.
+        if (!user || user.suspended) return null;
         if (!valid) return null;
 
         if (!isRole(user.role)) return null;

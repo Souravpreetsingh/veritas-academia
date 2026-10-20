@@ -25,14 +25,14 @@ datasource db {
 // ---------------------------------------------------------------------------
 
 model User {
-  id           String    @id @default(cuid())
-  email        String    @unique
-  passwordHash String
-  name         String
+  id            String    @id @default(cuid())
+  email         String    @unique
+  passwordHash  String
+  name          String
   // STUDENT | INSTRUCTOR | ADMIN (see src/lib/domain.ts)
-  role         String    @default("STUDENT")
+  role          String    @default("STUDENT")
   emailVerified DateTime?
-  image        String?
+  image         String?
 
   // Suspension is enforced server-side on every authenticated request.
   suspended       Boolean   @default(false)
@@ -45,11 +45,13 @@ model User {
 
   studentProfile         StudentProfile?
   instructorProfile      InstructorProfile?
-  instructorApplications InstructorApplication[]
-  requestsAsStudent      ServiceRequest[]       @relation("StudentRequests")
+  instructorApplications InstructorApplication[] @relation("ApplicantApplications")
+  reviewedApplications   InstructorApplication[] @relation("ApplicationReviews")
+  requestsAsStudent      ServiceRequest[]        @relation("StudentRequests")
   documents              Document[]
-  analysisJobsRequested  AnalysisJob[]          @relation("RequestedAnalysisJobs")
+  analysisJobsRequested  AnalysisJob[]           @relation("RequestedAnalysisJobs")
   auditEvents            AuditEvent[]
+  payments               Payment[]
 
   @@index([role])
   @@index([suspended])
@@ -61,8 +63,8 @@ model StudentProfile {
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  bio         String?
-  institution String?
+  bio          String?
+  institution  String?
   fieldOfStudy String?
 
   createdAt DateTime @default(now())
@@ -76,10 +78,10 @@ model InstructorProfile {
   userId String @unique
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  headline String?
-  bio      String?
+  headline       String?
+  bio            String?
   // JSON-encoded string arrays; upgraded to native JSONB arrays on PostgreSQL.
-  expertise       String?
+  expertise      String?
   qualifications String?
 
   // Only isApproved && isActive instructors may be listed publicly.
@@ -92,8 +94,10 @@ model InstructorProfile {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  services InstructorService[]
-  requests ServiceRequest[]
+  services    InstructorService[]
+  requests    ServiceRequest[]
+  // The application that produced this profile (reliable applicant→profile link).
+  application InstructorApplication?
 
   @@index([isApproved, isActive])
   @@map("instructor_profiles")
@@ -102,29 +106,44 @@ model InstructorProfile {
 model InstructorApplication {
   id     String @id @default(cuid())
   userId String
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user   User   @relation("ApplicantApplications", fields: [userId], references: [id], onDelete: Cascade)
 
-  fullName      String
-  email         String
-  phone         String?
-  bio           String
-  expertise       String?
-  qualifications String?
+  fullName         String
+  email            String
+  phone            String?
+  bio              String
+  expertise        String?
+  qualifications   String?
   // JSON-encoded proposed service offerings (name, description, amountMinor, turnaroundHours).
   proposedServices String?
 
   termsAcceptedAt DateTime
 
-  // PENDING_REVIEW | APPROVED | REJECTED | SUSPENDED
-  status        String    @default("PENDING_REVIEW")
-  reviewedAt    DateTime?
-  reviewedById  String?
-  reviewNotes   String?
+  // PENDING | APPROVED | REJECTED | WITHDRAWN (see src/lib/domain.ts)
+  status String @default("PENDING")
+
+  // Reviewer decision. `reviewedBy` is a real relation (SetNull) so the acting
+  // administrator is recorded reliably and the row survives reviewer deletion.
+  reviewedAt      DateTime?
+  reviewedById    String?
+  reviewedBy      User?     @relation("ApplicationReviews", fields: [reviewedById], references: [id], onDelete: SetNull)
+  rejectionReason String?
+  reviewNotes     String?
+
+  // The instructor profile created when this application is approved.
+  instructorProfileId String?            @unique
+  instructorProfile   InstructorProfile? @relation(fields: [instructorProfileId], references: [id], onDelete: SetNull)
+
+  // Duplicate-submission guard: equals the applicant's id only while PENDING and
+  // is nulled on every terminal transition. The unique constraint therefore
+  // allows at most one open application per user, while still permitting a
+  // fresh reapplication after REJECTED/WITHDRAWN (NULLs are distinct).
+  activeKey String? @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  @@index([userId])
+  @@index([userId, status])
   @@index([status])
   @@map("instructor_applications")
 }
@@ -138,9 +157,9 @@ model InstructorService {
   name            String
   description     String?
   amountMinor     Int
-  currency        String          @default("INR")
+  currency        String  @default("INR")
   turnaroundHours Int
-  isActive        Boolean         @default(true)
+  isActive        Boolean @default(true)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -155,25 +174,39 @@ model InstructorService {
 // Phase 2 records the request core only. Status transitions, payments, analysis
 // jobs, reports and disputes arrive with their respective later phases.
 model ServiceRequest {
-  id        String           @id @default(cuid())
-  reference String           @unique
-  studentId String
-  student   User             @relation("StudentRequests", fields: [studentId], references: [id], onDelete: Cascade)
-  instructorId   String
-  instructor     InstructorProfile @relation(fields: [instructorId], references: [id], onDelete: Restrict)
-  serviceId      String
-  service        InstructorService @relation(fields: [serviceId], references: [id], onDelete: Restrict)
+  id           String            @id @default(cuid())
+  reference    String            @unique
+  studentId    String
+  student      User              @relation("StudentRequests", fields: [studentId], references: [id], onDelete: Cascade)
+  instructorId String
+  instructor   InstructorProfile @relation(fields: [instructorId], references: [id], onDelete: Restrict)
+  serviceId    String
+  service      InstructorService @relation(fields: [serviceId], references: [id], onDelete: Restrict)
 
-  documents Document[]
+  documents    Document[]
+  payments     Payment[]
+  analysisJobs AnalysisJob[]
 
   title        String
   instructions String?
   deadlineAt   DateTime?
 
-  // DRAFT | Awaiting Payment | ... (see src/lib/domain.ts)
-  status       String @default("DRAFT")
-  amountMinor  Int
-  currency     String @default("INR")
+  // DRAFT | AWAITING_PAYMENT | ... (see src/lib/domain.ts)
+  status      String @default("DRAFT")
+  amountMinor Int
+  currency    String @default("INR")
+
+  // Instructor decision. `decisionAt` is stamped when the assigned instructor
+  // accepts or declines; `declineReason` is student-visible feedback and is
+  // only ever set on DECLINED. Internal reviewer notes are never stored here.
+  decisionAt    DateTime?
+  declineReason String?
+
+  // Explicit student consent for sending this request's document text to an
+  // external LLM provider. Null means no consent; withdrawing consent clears
+  // both fields. The version records which privacy notice was accepted.
+  llmProcessingConsentAt      DateTime?
+  llmProcessingConsentVersion String?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -192,9 +225,9 @@ model ServiceRequest {
 // src/lib/storage); this table stores a storage reference and metadata so the
 // database is never used to hold uploaded file bytes.
 model Document {
-  id      String  @id @default(cuid())
-  ownerId String
-  owner   User    @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  id        String          @id @default(cuid())
+  ownerId   String
+  owner     User            @relation(fields: [ownerId], references: [id], onDelete: Cascade)
   // A document may belong to a request; deleting the request keeps the record
   // but detaches it rather than destroying evidence.
   requestId String?
@@ -210,6 +243,20 @@ model Document {
   // AVAILABLE | QUARANTINED | DELETED (see src/lib/domain.ts)
   status String @default("AVAILABLE")
 
+  // Malware-scan state for the stored bytes. UNSCANNED | SCANNING | CLEAN |
+  // INFECTED | ERROR (see src/lib/domain.ts). Only a persisted CLEAN result
+  // whose checksum still matches the stored object may release QUARANTINED ->
+  // AVAILABLE (src/lib/document-scan.ts).
+  scanStatus    String    @default("UNSCANNED")
+  scanEngine    String?
+  // Safe diagnostic code only (e.g. not_configured, timeout, checksum_mismatch).
+  scanReason    String?
+  // Signature name for INFECTED results; never document content.
+  scanSignature String?
+  scanAttempts  Int       @default(0)
+  scanStartedAt DateTime?
+  scannedAt     DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
@@ -218,34 +265,58 @@ model Document {
   @@index([ownerId])
   @@index([requestId])
   @@index([status])
+  @@index([scanStatus])
   @@map("documents")
 }
 
-// A unit of analysis work against a document. Until a real, authorised provider
-// is connected, jobs remain UNCONFIGURED and are never marked COMPLETED.
+// A unit of analysis work against a document. Jobs are the durable, database-
+// backed work queue: no in-memory queue is used for production processing.
+// Until a real, authorised provider is connected, initiation is refused and
+// jobs are never marked COMPLETED.
 model AnalysisJob {
-  id            String   @id @default(cuid())
+  id            String          @id @default(cuid())
   documentId    String
-  document      Document @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  document      Document        @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  // Snapshot of the service request the document was authorised under. Kept
+  // for audit; every execution re-checks the live document/request linkage.
+  requestId     String?
+  request       ServiceRequest? @relation(fields: [requestId], references: [id], onDelete: SetNull)
   requestedById String
-  requestedBy   User     @relation("RequestedAnalysisJobs", fields: [requestedById], references: [id], onDelete: Cascade)
+  requestedBy   User            @relation("RequestedAnalysisJobs", fields: [requestedById], references: [id], onDelete: Cascade)
 
-  // SIMILARITY | AI_WRITING
+  // LOCAL_SIMILARITY | LLM_REVIEW | SIMILARITY | AI_WRITING
   type   String
-  // UNCONFIGURED | PENDING | PROCESSING | COMPLETED | FAILED
+  // UNCONFIGURED | PENDING | QUEUED | PROCESSING | RETRYABLE | COMPLETED | FAILED
   status String @default("UNCONFIGURED")
 
   // Provider integration boundary. Defaults to "unconfigured".
-  provider      String  @default("unconfigured")
-  providerJobId String?
-  // JSON-encoded provider metadata. Never store raw document text here.
-  providerMeta  String?
+  provider        String  @default("unconfigured")
+  providerJobId   String?
+  // Last normalized provider state reported by the adapter (QUEUED | PROCESSING).
+  providerStatus  String?
+  providerVersion String?
+  // Safe, allow-listed JSON metadata. Never raw provider payloads or content.
+  providerMeta    String?
 
-  errorMessage String?
-  attempts     Int      @default(0)
+  // documentId + ":" + type while the job is active; unique so concurrent
+  // initiation can never create two active jobs for the same work. Null once
+  // the job is COMPLETED or FAILED.
+  activeKey String? @unique
 
-  startedAt   DateTime?
-  completedAt DateTime?
+  // Safe error metadata only. errorMessage is a fixed, user-safe sentence.
+  errorCategory String?
+  errorCode     String?
+  errorMessage  String?
+  attempts      Int     @default(0)
+  failureCount  Int     @default(0)
+
+  submittedAt   DateTime?
+  startedAt     DateTime?
+  lastAttemptAt DateTime?
+  // Retry/poll due time. A future worker claims due jobs from the database.
+  nextAttemptAt DateTime?
+  completedAt   DateTime?
+  failedAt      DateTime?
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -253,26 +324,44 @@ model AnalysisJob {
   result AnalysisResult?
 
   @@index([documentId])
-  @@index([status])
+  @@index([requestId])
+  @@index([status, nextAttemptAt])
   @@index([type])
   @@map("analysis_jobs")
 }
 
-// Results are written ONLY by a real analysis provider. Score fields are
-// nullable by design: null means "not produced" — never a fabricated zero.
+// Results are written ONLY by a real analysis provider, in the same transaction
+// that moves the job to COMPLETED. Score fields are nullable by design: null
+// means "not produced" — never a fabricated zero.
 model AnalysisResult {
   id    String      @id @default(cuid())
   jobId String      @unique
   job   AnalysisJob @relation(fields: [jobId], references: [id], onDelete: Cascade)
 
-  // UNCONFIGURED | PENDING | PROCESSING | COMPLETED | FAILED
+  // COMPLETED is the only status written by this phase.
   status String
 
+  // Exactly one outcome is populated according to the job type. The others
+  // remain null so local similarity, LLM observations, specialist similarity
+  // and specialist AI-writing can never be conflated.
   similarityPercent Float?
   aiLikelihood      Float?
 
-  // JSON-encoded matched sources / segments. Null until a real provider runs.
-  matches         String?
+  // JSON-encoded normalized matched sources / highlighted AI segments.
+  matches  String?
+  segments String?
+
+  // LLM-assisted observations only. These are explicitly model-generated,
+  // grounded in the supplied document text/local matches, and never a
+  // specialist similarity/AI-detection result. Null for other job types.
+  observations String?
+
+  providerVersion String?
+  // Safe, allow-listed JSON metadata (provider id/version, threshold, AI
+  // disclaimer). Never raw provider responses or document contents.
+  metadata        String?
+  // Retained for schema compatibility. NEVER populated with a raw provider
+  // payload; normalized data belongs in matches/segments/metadata.
   providerPayload String?
 
   createdAt DateTime @default(now())
@@ -289,9 +378,9 @@ model AnalysisResult {
 // denials, uploads). Never stores document contents, passwords, or tokens.
 // `actorId` is nullable with SetNull so the trail survives user deletion.
 model AuditEvent {
-  id      String @id @default(cuid())
+  id      String  @id @default(cuid())
   actorId String?
-  actor   User?  @relation(fields: [actorId], references: [id], onDelete: SetNull)
+  actor   User?   @relation(fields: [actorId], references: [id], onDelete: SetNull)
 
   // e.g. "document.upload", "document.download", "document.download.denied"
   action     String
@@ -309,4 +398,112 @@ model AuditEvent {
   @@index([targetType, targetId])
   @@index([createdAt])
   @@map("audit_events")
+}
+
+// ---------------------------------------------------------------------------
+// Phase 3E — Razorpay payments
+// ---------------------------------------------------------------------------
+
+// A payment ORDER for a service request. An order is not a payment: the row is
+// created when checkout is initiated (status CREATED) and only becomes PAID
+// when verified evidence (timing-safe checkout signature plus the provider's
+// captured payment record, or a signature-verified webhook) confirms it.
+//
+// Provider identifiers are unique: one Razorpay order maps to exactly one local
+// payment, and a Razorpay payment id can never be applied twice or to a second
+// request. `activeKey` equals the request id while the payment is not PAID and
+// is nulled once PAID; together with its unique constraint this guarantees at
+// most one active order per request without relying on partial indexes, which
+// SQLite cannot express.
+model Payment {
+  id        String         @id @default(cuid())
+  requestId String
+  request   ServiceRequest @relation(fields: [requestId], references: [id], onDelete: Restrict)
+  studentId String
+  student   User           @relation(fields: [studentId], references: [id], onDelete: Restrict)
+
+  provider          String  @default("RAZORPAY")
+  providerOrderId   String  @unique
+  providerPaymentId String? @unique
+
+  // Price snapshot taken from the request row at initiation; the browser can
+  // never supply or alter it.
+  amountMinor Int
+  currency    String
+
+  // CREATED | FAILED | PAID (see src/lib/domain.ts)
+  status String @default("CREATED")
+
+  // Latest verified failure of a payment attempt on this order. Safe provider
+  // code only — never card data or full provider payloads.
+  failureCode String?
+  failureAt   DateTime?
+
+  paidAt DateTime?
+
+  // requestId while not PAID; NULL once PAID (see model comment above).
+  activeKey String? @unique
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  webhookEvents PaymentWebhookEvent[]
+
+  @@index([requestId])
+  @@index([studentId])
+  @@index([status])
+  @@map("payments")
+}
+
+// One row per signature-verified provider webhook event. `eventId` is unique,
+// so duplicate deliveries are detected and never applied twice; the row records
+// the event type, the matched payment (when one exists) and the outcome.
+model PaymentWebhookEvent {
+  id        String @id @default(cuid())
+  eventId   String @unique
+  eventType String
+
+  providerOrderId   String?
+  providerPaymentId String?
+
+  // APPLIED | NOOP | IGNORED | MISMATCH | FAILURE_RECORDED (see src/lib/domain.ts)
+  outcome String
+
+  paymentId String?
+  payment   Payment? @relation(fields: [paymentId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([providerOrderId])
+  @@index([providerPaymentId])
+  @@map("payment_webhook_events")
+}
+
+// ---------------------------------------------------------------------------
+// Phase 2 (security) — fixed-window rate-limit counters
+// ---------------------------------------------------------------------------
+
+// One row per (scope, keyHash, windowStart) fixed window. `keyHash` is an
+// HMAC-SHA256 digest of a privacy-conscious identifier (client IP, account
+// email, or user id) — raw IPs, emails and user ids are never stored here, and
+// no passwords, sessions or tokens ever enter this table.
+//
+// Atomicity: every check is a single INSERT ... ON CONFLICT DO UPDATE
+// (`count = count + 1`) driven by Prisma's native upsert, so concurrent
+// requests cannot bypass a limit by racing. Rows are inert once their window
+// has passed and are deleted opportunistically by
+// `cleanupExpiredBuckets()` in src/lib/rate-limit.ts.
+model RateLimitBucket {
+  id          String   @id @default(cuid())
+  // e.g. "login.source", "login.account", "register.source", "upload.user"
+  scope       String
+  keyHash     String
+  windowStart DateTime
+  count       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([scope, keyHash, windowStart])
+  @@index([windowStart])
+  @@map("rate_limit_buckets")
 }

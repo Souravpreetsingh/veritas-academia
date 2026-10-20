@@ -14,6 +14,8 @@ This repository is being built incrementally; see **Project status** below.
 
 ## Getting started
 
+Requires **Node.js 22 or newer** (`unpdf` requires Node 22+).
+
 ```bash
 # 1. Install dependencies
 npm install
@@ -46,6 +48,7 @@ Open http://localhost:3000.
 | `npm run db:studio` | Open Prisma Studio |
 | `npm run db:reset` | Drop and recreate the local database |
 | `npm test` | Run the automated test suite (uses a dedicated `prisma/test.db`) |
+| `npm run analysis:worker` | Process one bounded batch of due analysis jobs; schedule this externally |
 | `npm run grant-admin -- --email=you@example.com --confirm` | Promote an existing user to ADMIN |
 
 ## Accounts, roles and access
@@ -54,13 +57,26 @@ Three roles exist: `STUDENT`, `INSTRUCTOR`, `ADMIN`.
 
 - **Public registration** (`/register` → `POST /api/register`) always creates a
   `STUDENT`. The role is never read from the request body.
-- **Instructors** will gain access only through an approved application
-  (implemented in a later phase).
+- **Instructor onboarding** (`/instructor/register` →
+  `POST /api/instructor/register`) creates a `STUDENT` account plus a
+  `PENDING` instructor application in one step — no student registration
+  required. While pending, the applicant can sign in and is routed to the
+  application-status screen (`/instructor/application`), never the student
+  dashboard or instructor functionality.
+- **Instructors** gain portal access only through an approved application and
+  active profile; they must still be assigned to a request.
+- Dedicated sign-in screens live at `/student/login` and `/instructor/login`.
+  A session in one role never blocks the other portal's form (sign out to
+  switch accounts), and post-login destinations are role-validated.
 - **Administrators** are promoted only by running the local
-  `npm run grant-admin` script — never through any web route.
+  `npm run grant-admin -- --email=you@example.com --confirm` script — never
+  through any web route. They sign in through the standard sign-in screens and
+  review instructor applications at `/admin`.
 
 The `/student/*` and `/instructor/*` portals are protected by server-side
-layout guards (`src/app/student/layout.tsx`, `src/app/instructor/layout.tsx`).
+layout guards (`src/app/student/layout.tsx`, `src/app/instructor/layout.tsx`);
+the `/admin/*` dashboard is gated the same way
+(`src/app/admin/layout.tsx`) and every admin page re-checks the role.
 Administrators may view both portals for support purposes.
 
 ### Session & suspension policy
@@ -80,24 +96,59 @@ All variables are documented in `.env.example`. Required for local development:
 - `AUTH_SECRET` — random 32-byte base64 string
 - `NEXTAUTH_URL` / `NEXT_PUBLIC_APP_URL` — e.g. `http://localhost:3000`
 
-Placeholders for later phases (Razorpay, S3 storage, analysis providers) are
-present but not yet consumed. Analysis providers default to `unconfigured` and
-never return fabricated results.
+Razorpay variables are consumed by the payment phase. Storage and specialist
+analysis provider placeholders are present but no real S3 or specialist
+similarity/AI-writing adapter is connected. Local-corpus matching is built in.
+LLM-assisted observations are optional and disabled by default: set
+`LLM_PROVIDER`, `LLM_API_KEY`, `LLM_MODEL`, and
+`LLM_EXTERNAL_PROCESSING_ENABLED=true` server-side, and the student must also
+grant consent. Unconfigured capabilities fail closed and never return fabricated
+results. See `.env.example` and `docs/analysis.md`.
+
+Production deployment is planned separately: the database recommendation,
+Render service topology, private object storage, malware scanning, rate
+limiting, and the environment-variable matrix are documented in
+`docs/deployment-render.md` (proposal; nothing is provisioned).
+
+Analysis jobs are stored in the database and are not processed by the web
+process. Run the operator worker (for example from cron) to process due jobs:
+
+```bash
+npm run analysis:worker
+```
+
+One invocation processes a bounded batch and exits. No scheduler is deployed by
+this repository.
 
 ## Project status
 
-Phase 1 (audit), Phase 2 (foundation) and Phase 3A (data model) are complete:
+Phases 1–2 and 3A–3G are implemented:
 
-- Database schema + migrations (`prisma/`)
+- Database schema + additive migrations (`prisma/`)
 - Authentication with server-enforced roles
 - Environment + secret handling
-- Private storage interface (local dev adapter)
-- Analysis-provider interface (explicitly unconfigured)
-- `Document`, `AnalysisJob`, `AnalysisResult` models (metadata only; no file
-  bytes in the database and no fabricated analysis results)
+- Private storage interface (local dev adapter), document upload/quarantine and
+  authorized download
+- Instructor applications and the approved/active instructor service catalogue
+- Administrator dashboard (`/admin`): real database-backed application and
+  account counts, a filterable review queue, full application detail, and
+  audited approve/reject decisions with mandatory rejection reasons
+- Student service requests with the instructor inbox, accept/decline decisions,
+  and verified Razorpay payment capture
+- Document analysis MVP: deterministic local-corpus similarity, consent-gated
+  LLM observations with grounded citations and safe output parsing, separate
+  specialist similarity/AI-writing contracts, a database-backed work queue,
+  bounded retries, normalized results, and instructor/student report UI
+- Content Security Policy: per-request nonce, enforced framing/object/base
+  baseline (`next.config.ts`), and a report-only full policy pending browser
+  validation; the obsolete prototype screens and the `eval`-based renderer
+  were removed (`src/proxy.ts`, `src/lib/security/csp.ts`)
 - Automated test harness (`npm test`)
 
-Not yet implemented: document-upload endpoints, instructor approval, request
-lifecycle, real document analysis, Razorpay payments, report delivery, payouts,
-administrator dashboard.
-See `docs/data-model.md` for the SQLite → PostgreSQL migration notes.
+Not yet implemented: real specialist similarity/AI-writing adapters, a deployed
+scheduler for the operator worker, a visual diff viewer, refunds/payouts, a
+deployed malware scanner (the ClamAV adapter and scan lifecycle are implemented
+and fail closed; no clamd service exists yet), and an S3 storage adapter. See
+`docs/data-model.md` for SQLite → PostgreSQL notes, `docs/analysis.md` for the
+analysis, privacy, and worker model, and `docs/deployment-render.md` for the
+Render production plan.

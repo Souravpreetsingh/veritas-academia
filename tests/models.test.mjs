@@ -11,6 +11,8 @@ function isKnownError(err, code) {
 }
 
 async function reset() {
+  await prisma.paymentWebhookEvent.deleteMany();
+  await prisma.payment.deleteMany();
   await prisma.auditEvent.deleteMany();
   await prisma.analysisResult.deleteMany();
   await prisma.analysisJob.deleteMany();
@@ -104,8 +106,16 @@ test("analysis defaults to unconfigured and scores stay null (no fabricated data
   assert.equal(job.provider, "unconfigured");
   assert.equal(job.status, "UNCONFIGURED");
   assert.equal(job.providerJobId, null);
+  assert.equal(job.providerStatus, null);
+  assert.equal(job.providerVersion, null);
+  assert.equal(job.activeKey, null);
+  assert.equal(job.failureCount, 0);
+  assert.equal(job.errorCategory, null);
   assert.equal(job.startedAt, null);
+  assert.equal(job.submittedAt, null);
+  assert.equal(job.nextAttemptAt, null);
   assert.equal(job.completedAt, null);
+  assert.equal(job.failedAt, null);
 
   const result = await prisma.analysisResult.create({
     data: { jobId: job.id, status: "UNCONFIGURED" },
@@ -113,6 +123,9 @@ test("analysis defaults to unconfigured and scores stay null (no fabricated data
   assert.equal(result.similarityPercent, null);
   assert.equal(result.aiLikelihood, null);
   assert.equal(result.matches, null);
+  assert.equal(result.segments, null);
+  assert.equal(result.providerVersion, null);
+  assert.equal(result.metadata, null);
   assert.equal(result.providerPayload, null);
 });
 
@@ -121,6 +134,17 @@ test("document status defaults to AVAILABLE", async () => {
   const user = await createUser();
   const doc = await prisma.document.create({ data: baseDocument(user.id) });
   assert.equal(doc.status, "AVAILABLE");
+});
+
+test("document scan state defaults to UNSCANNED with no attempts", async () => {
+  await reset();
+  const user = await createUser();
+  const doc = await prisma.document.create({ data: baseDocument(user.id) });
+  assert.equal(doc.scanStatus, "UNSCANNED");
+  assert.equal(doc.scanAttempts, 0);
+  assert.equal(doc.scanReason, null);
+  assert.equal(doc.scanSignature, null);
+  assert.equal(doc.scannedAt, null);
 });
 
 test("audit events persist with non-sensitive metadata", async () => {

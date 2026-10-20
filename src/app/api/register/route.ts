@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { Prisma } from "@prisma/client";
 import { prisma } from "@/lib/db";
 import { hashPassword, checkPasswordPolicy, normalizeEmail } from "@/lib/password";
+import { REQUEST_BODY_LIMITS, readJsonBodyWithLimit } from "@/lib/request-body";
+import { guardRegistration } from "@/lib/rate-limit-guard";
 
 export const runtime = "nodejs";
 
@@ -13,12 +15,19 @@ function fail(error: string, status = 400) {
 // impossible for a visitor to self-assign INSTRUCTOR or ADMIN: the role is
 // never read from the request body and defaults to STUDENT in the database.
 export async function POST(request: Request) {
-  let body: { name?: unknown; email?: unknown; password?: unknown };
-  try {
-    body = await request.json();
-  } catch {
-    return fail("Invalid request body.");
+  // Abuse protection first: malformed or hostile requests still consume the
+  // source bucket, so a script cannot rotate emails to avoid the limit.
+  const limited = await guardRegistration(request);
+  if (limited) return limited;
+
+  const parsed = await readJsonBodyWithLimit(request.body, REQUEST_BODY_LIMITS.jsonBytes);
+  if (!parsed.ok) {
+    return fail(
+      parsed.tooLarge ? "The request body is too large." : "Invalid request body.",
+      parsed.tooLarge ? 413 : 400,
+    );
   }
+  const body = (parsed.value ?? {}) as { name?: unknown; email?: unknown; password?: unknown };
 
   const name = typeof body.name === "string" ? body.name.trim() : "";
   const rawEmail = typeof body.email === "string" ? body.email : "";

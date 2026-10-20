@@ -23,4 +23,6 @@ console.log("• Preparing dedicated test database (prisma/test.db)");
 run("npx prisma db push --skip-generate --force-reset --accept-data-loss");
 
 console.log("• Running node:test suites");
-run('node --import ./scripts/ts-resolve-hook.mjs --test "tests/**/*.test.mjs"');
+// --test-concurrency=1 runs test files sequentially so the two database-backed
+// suites never contend for the shared prisma/test.db file.
+run('node --import ./scripts/ts-resolve-hook.mjs --test-concurrency=1 --test "tests/**/*.test.mjs"');
