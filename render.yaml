@@ -22,9 +22,11 @@ services:
     # Build runs on separate compute and cannot see the persistent disk. The
     # build-only DATABASE_URL keeps Prisma generation/build away from the
     # runtime database path while /var/data is unmounted.
-    buildCommand: bash -c 'export DATABASE_URL="file:/tmp/build.db"; npm ci --include=dev && npx prisma generate && npm run build'
+    buildCommand: bash -c 'export DATABASE_URL="file:/tmp/build.db"; export NEXT_PUBLIC_APP_URL="${NEXT_PUBLIC_APP_URL:-$RENDER_EXTERNAL_URL}"; npm ci --include=dev && npx prisma generate && npm run build'
     # Migrations MUST run here: Render's preDeployCommand runs on separate
-    # compute without the disk, so it cannot migrate the SQLite file.
+    # compute without the disk, so it cannot migrate the SQLite file. The
+    # public URLs come from Render's built-in RENDER_EXTERNAL_URL; no manual
+    # hostname is baked into the Blueprint.
     startCommand: bash -c 'export NEXTAUTH_URL="${NEXTAUTH_URL:-$RENDER_EXTERNAL_URL}"; export NEXT_PUBLIC_APP_URL="${NEXT_PUBLIC_APP_URL:-$RENDER_EXTERNAL_URL}"; npx prisma migrate deploy && npm start'
     healthCheckPath: /api/health
     disk:
@@ -51,15 +53,3 @@ services:
         generateValue: true
       - key: RATE_LIMIT_HASH_SECRET
         generateValue: true
-      # Self-references resolve to the live https://*.onrender.com URL. The
-      # start command also exports these as a fallback on first boot.
-      - key: NEXTAUTH_URL
-        fromService:
-          name: veritas-academia
-          type: web
-          envVarKey: RENDER_EXTERNAL_URL
-      - key: NEXT_PUBLIC_APP_URL
-        fromService:
-          name: veritas-academia
-          type: web
-          envVarKey: RENDER_EXTERNAL_URL
